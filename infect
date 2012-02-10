@@ -15,7 +15,7 @@ for f in $(find . | egrep -v \.git\|README\|infect\|defect); do
             esac
          fi
       else
-         if [ $(which $(basename $f)) ]; then
+         if [ $(which $(basename $f) 2>/dev/null) ]; then
             echo "$f exists elsewhere in the path."
          fi
          if [ -f ~/$f ]; then
