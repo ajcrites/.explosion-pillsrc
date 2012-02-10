@@ -1,0 +1,39 @@
+#!/bin/sh
+cd $(dirname $0)
+replace=
+for f in $(find . | egrep -v \.git\|README\|infect); do
+   f=${f:2}
+   if [ -n $f ]; then
+      if [ -d $f ]; then
+         if [ ! -d ~/$f ];then
+            echo "directory $f does not exist.  Create now? (y)es, (n)o"
+            read -s -n1 ch
+            case $ch in
+               y) mkdir ~/$f;;
+               n) ;;
+               *) echo "You must select (y) or (n)"; exit 1;;
+            esac
+         fi
+      else
+         if [ $(which $(basename $f)) ]; then
+            echo "$f exists elsewhere in the path."
+         fi
+         if [ -f ~/$f ]; then
+            if [ ! $replace ]; then
+               echo "$f already exists at the destination. Replace? (y)es, (n)o, replace (a)ll"
+               read -s -n1 ch
+               case $ch in
+                  a) replace=true; cp $f ~/$f;;
+                  y) cp $f ~/$f;;
+                  n) ;;
+                  *) echo "You must select (y), (n), or (a)"; exit 1;;
+               esac
+            else
+               cp $f ~/$f
+            fi
+         else
+            cp $f ~/$f
+         fi
+      fi
+   fi
+done
