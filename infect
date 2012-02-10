@@ -1,7 +1,7 @@
 #!/bin/sh
 cd $(dirname $0)
 replace=
-for f in $(find . | egrep -v \.git\|README\|infect); do
+for f in $(find . | egrep -v \.git\|README\|infect\|defect); do
    f=${f:2}
    if [ -n $f ]; then
       if [ -d $f ]; then
@@ -20,14 +20,21 @@ for f in $(find . | egrep -v \.git\|README\|infect); do
          fi
          if [ -f ~/$f ]; then
             if [ ! $replace ]; then
-               echo "$f already exists at the destination. Replace? (y)es, (n)o, replace (a)ll"
-               read -s -n1 ch
-               case $ch in
-                  a) replace=true; cp $f ~/$f;;
-                  y) cp $f ~/$f;;
-                  n) ;;
-                  *) echo "You must select (y), (n), or (a)"; exit 1;;
-               esac
+               decide=
+               while [ ! $decide ]; do
+                  echo "$f already exists at the destination. Replace? (y)es, (n)o, replace (a)ll, view (d)iff"
+                  read -s -n1 ch
+                  case $ch in
+                     a) replace=true; cp $f ~/$f; decide=true;;
+                     y) cp $f ~/$f; decide=true;;
+                     n) decide=true;;
+                     d)
+                        [ $(which colordiff) ] && command=colordiff || command=diff
+                        $command -U0 -wbB ~/$f $f | less
+                     ;;
+                     *) echo "You must select (y), (n), or (a)"; exit 1;;
+                  esac
+               done
             else
                cp $f ~/$f
             fi
