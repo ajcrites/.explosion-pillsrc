@@ -1,0 +1,33 @@
+##    Keybindings    ##
+# bind F4  to split screen
+# bind F5  to switch split focus
+# bind F6  to remove all splits but the current
+# bind F7  to remove the current split
+# bind F8  to kill current screen window.
+# bind F9  to create a new screen
+# bind F10 to rename current screen window
+# bind F11 to move to previous window
+# bind F12 to move to next window
+bindkey -k k4 split
+bindkey -k k5 focus
+bindkey -k k6 only
+bindkey -k k7 remove
+bindkey -k k8 kill
+bindkey -k k9 screen
+bindkey -k k; title
+bindkey -k F1 prev
+bindkey -k F2 next
+
+startup_message off
+
+# Window list at the bottom.
+hardstatus alwayslastline
+#hardstatus string "%-w%{= BW}%50>%n %t%{-}%+w%<"
+##hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{Y}%l%{g} ]'
+
+defscrollback 5000    # Use a 5000-line scrollback buffer
+vbell off
+altscreen on
+#Fix putty scrollback..sort of
+termcapinfo xterm ti@:te@
