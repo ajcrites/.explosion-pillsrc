@@ -1,0 +1,6 @@
+#!/usr/bin/perl
+# Paint it black
+while (<>) {
+   s/\e\[?.*?[\@-~]//g;
+   print;
+}

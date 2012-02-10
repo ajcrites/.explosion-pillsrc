@@ -1,0 +1,41 @@
+#! /bin/bash
+# Usage: implode [-d <delimiter>] [-s <separator>] [file]...
+# Implode a string separated by the given separator on the given delimiter.
+# If no delimiter is provided, uses nothing
+# If no separator is provided, uses IFS
+# Acts on the specified files, or stdin if no file is provided
+# See `man implode`
+
+function usage {
+   echo "Usage: $0 [-d<delim>] [-s<separator>] [file]..."
+}
+
+list=
+delim=
+while getopts .hd:s:. args; do
+   case $args in
+      h) usage; exit 0;;
+      d) delim=$OPTARG; shift;;
+      s) IFS=$OPTARG; shift;;
+      *) echo "Invalid Switch"; usage; exit 1;;
+   esac
+done
+
+if [ $# -ge 1 ]; then
+   until [ $# -eq 0 ]; do
+      while read line; do
+         list="${list}$line"
+      done < $1
+      shift
+   done
+else
+   list=$(< /dev/stdin)
+fi
+
+str=
+for item in $list; do
+   [[ -n $str ]] && str="${str}${delim}"
+   str="${str}${item}"
+done
+
+printf $str

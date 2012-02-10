@@ -1,0 +1,15 @@
+#! /bin/bash -e
+# To invoke this script, run `. up` (suggest alias up=". up")
+# scripts cannot change a user's directory
+# Usage: up [<number-of-directories>]
+# Imagine how many characters a day you waste typing `../`
+# See `man up`
+if [ $# -lt 1 ]; then
+   cd ..
+elif [ -n "$(echo $1 | sed 's/[0-9]//g')" ]; then
+   echo "You must specify a number or no argument"
+else
+   for ((x=1; x<=$1; x++)) do
+      cd ..
+   done
+fi

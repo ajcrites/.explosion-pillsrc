@@ -1,0 +1,11 @@
+#! /bin/bash -e
+# Pick a random line from a file
+# Usage: randline <file>
+# See `man randline`
+
+if [[ $# != 1 ]]; then
+   echo "Usage: $0 <file>"
+   exit 1
+fi
+
+sed -n $(expr $RANDOM % $(wc -l < $1) + 1)p $1

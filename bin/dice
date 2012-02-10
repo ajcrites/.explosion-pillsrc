@@ -1,0 +1,150 @@
+#!/usr/bin/python
+#vim: filetype=python
+# For the *really* indecisive
+# See `man dice`
+import sys
+from getopt import getopt
+from random import randint
+
+def __fatal__(args="unknown error"):
+   print >> sys.stderr, args
+   sys.exit(1)
+
+def __usage__():
+   print "Usage: %s [-d<number-of-dice>] [-s<comma-separated-number-of-sides-per-dice>]" % sys.argv[0]
+   exit
+
+def translate_color(color):
+   """Change the color of a string from text to the appropriate code"""
+   colorlist = {
+      'default': 0
+      , 'bold': 1
+      , 'underlined': 4
+      , 'underline': 4
+      , 'flashing text': 5
+      , 'flash': 5
+      , 'reverse field': 7
+      , 'reverse': 7
+      , 'red': 31
+      , 'green': 32
+      , 'orange': 33
+      , 'yellow': 33
+      , 'blue': 34
+      , 'purple': 35
+      , 'cyan': 36
+      , 'gray': 37
+      , 'grey': 37
+      , 'black-background': 40
+      , 'black-bg': 40
+      , 'black background': 40
+      , 'black bg': 40
+      , 'red-background': 41
+      , 'red-bg': 41
+      , 'red background': 41
+      , 'red bg': 41
+      , 'green-background': 42
+      , 'green-bg': 42
+      , 'green background': 42
+      , 'green bg': 42
+      , 'orange-background': 43
+      , 'orange-bg': 43
+      , 'orange background': 43
+      , 'orange bg': 43
+      , 'yellow-background': 43
+      , 'yellow-bg': 43
+      , 'yellow background': 43
+      , 'yellow bg': 43
+      , 'blue-background': 44
+      , 'blue-bg': 44
+      , 'blue background': 44
+      , 'blue bg': 44
+      , 'purple-background': 45
+      , 'purple-bg': 45
+      , 'purple background': 45
+      , 'purple bg': 45
+      , 'cyan-background': 46
+      , 'cyan-bg': 46
+      , 'cyan background': 46
+      , 'cyan bg': 46
+      , 'gray-background': 47
+      , 'gray-bg': 47
+      , 'gray background': 47
+      , 'gray bg': 47
+      , 'grey-background': 47
+      , 'grey-bg': 47
+      , 'grey background': 47
+      , 'grey bg': 47
+      , 'dark gray': 90
+      , 'dark-gray': 90
+      , 'darkgray': 90
+      , 'dark grey': 90
+      , 'dark-grey': 90
+      , 'darkgrey': 90
+   }
+   color = str(color).lower()
+   if color in colorlist:
+      return colorlist[color]
+   elif color.replace(';', '').isdigit():
+      return color
+   elif color.replace(';', '') != color:
+      colorful = []
+      for c in color.split(';'):
+         colorful.append(str(translate_color(c)))
+      return ';'.join(colorful)
+   else:
+      __fatal__("Unsupported color: " + color + " -- must be numeric or in known color list")
+
+num = 1
+sides = [6]
+colors = [0]
+
+opts, rem = getopt(sys.argv[1:], 'hd:s:c:')
+
+for opt, optarg in opts:
+   if opt == '-h':
+      usage()
+   if opt == '-s':
+      sides = optarg.split(',')
+   if opt == '-d':
+      num = int(optarg)
+   if opt == '-c':
+      colors = optarg.split(',')
+
+if num < 0:
+   __fatal__("Number of dice must be greater than one")
+
+if len(sides) > num:
+   __fatal__("Sides list must be less than or equal to the number of dice.  If less than, the last side in the list applies to the remaining dice.")
+
+if len(colors) > num:
+   __fatal__("Colors list must be less than or equal to the number of dice.  If less than, the remaining dice are not colored.")
+
+rolls = []
+colored = []
+
+for f in range(0,num):
+   if f > len(sides) - 1:
+      side = sides[-1]
+   else:
+      side = sides[f]
+
+   if f > len(colors) - 1:
+      color = 0
+   else:
+      color = colors[f]
+
+   color = translate_color(color)
+
+   if (int(side) < 2):
+      __fatal__("A die must have at least two sides.")
+
+   roll = randint(1,int(side))
+   rolls.append(roll)
+   colored.append('\033[' + str(color) + "m" + str(roll) + "\033[0m")
+
+result = "Rolled a %s " % ','.join(colored)
+if num > 1:
+   result += " (%s total)" % sum(rolls)
+   pass
+
+print result
