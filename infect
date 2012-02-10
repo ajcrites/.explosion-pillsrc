@@ -30,7 +30,7 @@ for f in $(find . | egrep -v \.git\|README\|infect\|defect); do
                      n) decide=true;;
                      d)
                         [ $(which colordiff) ] && command=colordiff || command=diff
-                        $command -U0 -wbB ~/$f $f | less
+                        $command -U0 -wbB ~/$f $f | less -R
                      ;;
                      *) echo "You must select (y), (n), or (a)"; exit 1;;
                   esac
