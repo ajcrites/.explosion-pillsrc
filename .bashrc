@@ -20,7 +20,7 @@ shopt -s progcomp
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-export PS1='\[\e[01;32m\]andrew\[\e[01;3$(($RANDOM % 8))m\]@\[\e[01;32m\]money \[\e[01;31m\]\w \[\e[01;33m\]$\[\e[0m\] '
+export PS1='\[\e[01;32m\]andrew\[\e[01;3$(($RANDOM % 8))m\]@\[\e[01;32m\]<place> \[\e[01;31m\]\w \[\e[01;33m\]$\[\e[0m\] '
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then

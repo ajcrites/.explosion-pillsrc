@@ -114,3 +114,6 @@ alias grep="ack"
 
 #short
 alias list="cut -d':' -f1 | sort -u"
+
+#git
+alias gd="git diff | colordiff | less -R"
