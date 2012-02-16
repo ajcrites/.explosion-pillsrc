@@ -50,7 +50,7 @@ vnoremap <C-P>:call PhpDocRange()<CR>
 
 "source /usr/share/vim/vim70/syntax/php.vim
 " source /usr/share/vim/vim70/indent/php.vim
-set dictionary+=/home/asura/.vim/phpfunctions.txt
+set dictionary+=/home/ajcrites/.vim/bundle/vim-explosion-pills/phpfunctions.txt
 set complete-=k complete+=k
 
 set bs=2             " backspace ???
