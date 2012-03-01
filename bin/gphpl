@@ -1,0 +1,16 @@
+#!/bin/bash
+# For git
+# Syntax check on all php files in the specified revision or currently changed files
+#  if no revision is specified
+# Note: This will not run php -l on the files as they were in the revision, but as they are
+#  in the location you run it. This is probably desired, fortunately.
+# Gotcha: If the dev uploads a changeset with a syntax error that has been corrected in a later
+#  changeset or in their current file changes and that changeset becomes the tip of the repo,
+#  the syntax error will not be caught simply by phpl.  Devs should avoid doing this, though.
+# This can only be run in a mercurial repo
+# Has a dependency on `hgfiles`, at least if you want to provide a changeset
+# Will not print anything if there are no php files to check
+cd $(git rev-parse --show-toplevel)
+files=$(git ls-files --modified)
+
+for f in $files; do php -l $f; done
