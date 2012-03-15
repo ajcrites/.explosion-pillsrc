@@ -34,10 +34,10 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-# See /home/ajcrites/.bash_aliases
+# *Don't* See /home/ajcrites/.bash_aliases
 source ~/.bash_aliases
 
-# See /home/ajcrites/.bash_functions
+# *Don't* See /home/ajcrites/.bash_functions
 source ~/.bash_functions
 
 # have a nice less: caseInsesitive, line numbers
