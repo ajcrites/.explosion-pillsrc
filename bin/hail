@@ -1,0 +1,6 @@
+#!/bin/bash
+# Display the first *and* last n lines of a file
+# Usage: hail [<lines>] <file>
+head ${2+-n$1} ${2-$1}
+echo "==================="
+tail ${2+-n$1} ${2-$1}
