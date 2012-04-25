@@ -8,7 +8,7 @@ filetype plugin on
 
 syntax on            " Enable syntax highlighting
 set autoindent       " Autoidentation on
-set smartindent       " Smartindentation on
+set smartindent      " Smartindentation on
 set showmatch        " Blink back to closing bracket (using % key)
 
 "set tabstop=3        " Set Tab size @gleim
@@ -303,6 +303,7 @@ imap functoin function
 imap funciton function
 imap multipe multiple
 imap codE> code>
+imap 4_ $_
 
 "#macros for common commands
 "s is common command mode

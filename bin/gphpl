@@ -7,8 +7,7 @@
 # Gotcha: If the dev uploads a changeset with a syntax error that has been corrected in a later
 #  changeset or in their current file changes and that changeset becomes the tip of the repo,
 #  the syntax error will not be caught simply by phpl.  Devs should avoid doing this, though.
-# This can only be run in a mercurial repo
-# Has a dependency on `hgfiles`, at least if you want to provide a changeset
+# This can only be run in a git repo
 # Will not print anything if there are no php files to check
 cd $(git rev-parse --show-toplevel)
 files=$(git ls-files --modified)
