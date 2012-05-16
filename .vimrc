@@ -35,6 +35,7 @@ autocmd BufEnter *.spec set shiftwidth=3 tabstop=3 softtabstop=3
 autocmd BufEnter *.xsl  set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter *.xsd  set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter *.java set shiftwidth=2 tabstop=2 softtabstop=2
+autocmd BufEnter *.md set shiftwidth=4 tabstop=4 softtabstop=4
 
 "Remember last line after opening file (from /etc/vim/vimrc
 if has("autocmd")
@@ -275,7 +276,7 @@ inoremap /purp <Esc>:set<Space>paste<CR>i
 
 "Comments
 imap //* /**<CR><Space>*<CR>*/<Up><End><Space>
-inoremap /@ /**#@+<CR>/**#@-*/<Up><End><CR><Space>*<Space>
+"inoremap /@ /**#@+<CR>/**#@-*/<Up><End><CR><Space>*<Space>
 inoremap /+ /**#@+
 inoremap /- /**#@-*/
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Create files and immediately remove read, write, and execute permissions from anyone other than user
+# Create files and immediately remove read, write, and execute permissions from anyone other than owner
 # Usage: hide FILE...
 touch $@
 chmod go-rwx $@
