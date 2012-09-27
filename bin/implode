@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 # Usage: implode [-h] [-d <delimiter>] [-s <separator>] [-e] [file]...
 # Implode a string separated by the given separator on the given delimiter.
 # If no delimiter is provided, uses nothing
@@ -38,7 +38,7 @@ fi
 
 str=
 for item in $list; do
-   test -n "$empty" -a -n "$item" -o -z "$empty" && str=$str${str:+$delim}${item}
+   test -n "$empty" -a -n "$item" -o -z "$empty" && str=$str"${str:+$delim}"${item}
 done
 
-printf $str
+echo $str

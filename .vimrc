@@ -305,6 +305,7 @@ imap funciton function
 imap multipe multiple
 imap codE> code>
 imap 4_ $_
+imap if( if<Space>(
 
 "#macros for common commands
 "s is common command mode

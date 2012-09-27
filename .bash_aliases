@@ -1,7 +1,7 @@
 #ls
 alias ls='ls --color=auto'
 alias l='ls -l'
-alias la='ls -la'
+alias la='ls -lA'
 
 #typos
 alias clera='clear'
@@ -52,7 +52,6 @@ alias exti="exit"
 alias py="python"
 
 #ack
-alias ack="ack-grep"
 alias grep="ack"
 
 #list files after grep and strip colors; this works surprisingly well
