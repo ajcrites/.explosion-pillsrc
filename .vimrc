@@ -81,17 +81,6 @@ set scrolloff=3      " dont let the curser get too close to the edge
 set laststatus=2     " laststatus:  show status line?  Yes, always!
 set nonumber
 
-fu! CreateTag (key)
-   if a:key =~ 'input$\|br$\|hr$\|img$\|link$\|area$\|base$\|basefont$\|meta$'
-      exe 's/' . a:key . '/<' . a:key . ' \/>/'
-   else
-      exe 's/' . a:key . '/<' . a:key . '><\/' . a:key . '>'
-   endif
-   exe 'norm ww'
-   exe 'startinsert'
-endfu
-map T :call CreateTag('<C-r><C-w>')<CR>
-
 au Filetype php set spell
 au Filetype html set spell
 
@@ -192,9 +181,16 @@ match Badspace /\s\+$/
 "Quirky mappings
 map j <Left>
 map k <Down>
+nnoremap K i<CR><Esc>
 map l <Up>
 map ; <Right>
 map , <PageDown>
+"Prevent pause on dd waiting for dt/df
+noremap dd dd
+noremap dt dt
+noremap yy yy
+noremap yt yt
+noremap df df
 noremap t .
 map . <PageUp>
 map f 5
@@ -209,6 +205,7 @@ map fd <Esc><Home>/{<Return><C-l>d%dd
 "Create matching braces
 imap {{ {<Esc>o}<Up><Esc>o
 imap {( {<Esc>o});<Up><Esc>o<Tab>
+imap 2{ {{}}<Left><Left>
 
 "Created matches for building arrays, functions, etc.
 imap [' ['']<Left><Left>
@@ -306,10 +303,22 @@ imap multipe multiple
 imap codE> code>
 imap 4_ $_
 imap if( if<Space>(
+imap Gliem Gleim
+imap breka break
 
-"#macros for common commands
+function! DashToggle()
+   echo &iskeyword
+   if matchstr(&iskeyword, '-$') == '-'
+      set iskeyword-=-
+   else
+      set iskeyword+=-
+   endif
+endfunction
+
+"macros for common commands
 "s is common command mode
 nmap sp :set paste!<CR>
+nmap sd :call DashToggle()<CR>
 nmap sn :set nonumber!<CR>
 nmap ss :set spell!<CR>
 nmap sj <C-w>j
@@ -317,7 +326,7 @@ nmap sk <C-w>k
 nmap sl <C-w>l
 nmap s; <C-w>;
 nmap <TAB> i<TAB>
-imap cb <Space><Esc>dbxi
+"imap cb <Space><Esc>dbxi
 
 "moving between tabs
 nmap g0 :tabfirst<CR>

@@ -62,3 +62,7 @@ alias gd="git diff | colordiff | less -R"
 
 #Keep some aliases on the server .. alone
 [ -f ~/.bash_aliases_here ] && . ~/.bash_aliases_here
+
+#js
+alias js="java -jar ~/tools/rhino1_7R4/js.jar"
+alias jslint="java -jar ~/tools/jslint4java-2.0.3/jslint4java-2.0.3.jar --browser --indent 3 --predef '\$'"

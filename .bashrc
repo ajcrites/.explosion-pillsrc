@@ -20,7 +20,7 @@ shopt -s progcomp
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-export PS1='\[\e[01;34m\]andrew\[\e[01;3$(($RANDOM % 8))m\]@\[\e[01;34m\]<place> \[\e[01;31m\]\w \[\e[1;46m\]$\[\e[0m\] '
+export PS1='\[\e[01;34m\]andrew\[\e[01;3$(($RANDOM % 8))m\]@\[\e[01;34m\]uf \[\e[01;31m\]\w \[\e[1;46m\]$\[\e[0m\] '
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
@@ -50,4 +50,5 @@ export PATH=$PATH:~/bin:~/.rvm/bin:
 export PATH=$(echo "$PATH" |tr ':' '\n' | sort -u | sed '/^\s*$/d' | tr '\n' ':')
 export MANPATH=$MANPATH:~/man
 export MANPATH=$(echo "$MANPATH" |tr ':' '\n' | sort -u | sed '/^\s*$/d' | tr '\n' ':')
-LANG="en_US.utf-8"
+export LANG="en_US.utf-8"
+export LC_ALL="en_US.utf-8"
