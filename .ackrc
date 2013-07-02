@@ -2,3 +2,4 @@
 --smart-case
 --color
 --type-set=spec=.spec
+--pager= LESS='FSRX' less

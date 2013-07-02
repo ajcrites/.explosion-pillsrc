@@ -1,6 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/var/www'
-let g:netrw_dirhist_2='/var'
-let g:netrw_dirhist_3='/home/ajcrites/dev/.explosion-pillsrc/.vim/bundle/html5.vim'
-let g:netrw_dirhist_4='/home/ajcrites/dev/.explosion-pillsrc/.vim/bundle/html5.vim/syntax'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/ajcrites/httpd-expose/html/misc/_remote/expo'
+let g:netrw_dirhist_2='/home/ajcrites/httpd-expose/html/misc/_remote'
+let g:netrw_dirhist_3='/home/albyrd/httpd-iatc-intro/httpd'

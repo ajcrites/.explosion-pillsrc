@@ -25,6 +25,7 @@ autocmd FileType spec set filetype=xml
 autocmd BufEnter * set shiftwidth=3 tabstop=3 softtabstop=3
 
 autocmd BufEnter *.php  set shiftwidth=3 tabstop=3 softtabstop=3
+autocmd BufEnter */Desktop/* set shiftwidth=8 tabstop=8 softtabstop=8
 autocmd BufEnter *.py   set shiftwidth=3 tabstop=3 softtabstop=3
 autocmd BufEnter *.html set shiftwidth=3 tabstop=3 softtabstop=3
 autocmd BufEnter *.css  set shiftwidth=3 tabstop=3 softtabstop=3
@@ -83,6 +84,9 @@ set nonumber
 
 au Filetype php set spell
 au Filetype html set spell
+au Filetype xhtml set spell
+au Filetype md set spell
+au Filetype txt set spell
 
 " -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 
@@ -165,7 +169,6 @@ autocmd FileType java      call SlashComment()
 fu! WriteTags()
  if line("$") == 1
     call append(0, "<?php")
-    call append(2, "?>")
   endif
 endfunction
 
@@ -176,7 +179,7 @@ endfunction
 colorscheme andy
 
 highlight Badspace ctermfg=red ctermbg=red
-match Badspace /\s\+$/
+au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link customBadWhitespace Error
 
 "Quirky mappings
 map j <Left>
@@ -205,7 +208,7 @@ map fd <Esc><Home>/{<Return><C-l>d%dd
 "Create matching braces
 imap {{ {<Esc>o}<Up><Esc>o
 imap {( {<Esc>o});<Up><Esc>o<Tab>
-imap 2{ {{}}<Left><Left>
+inoremap 2{ {{}}<Left><Left>
 
 "Created matches for building arrays, functions, etc.
 imap [' ['']<Left><Left>
@@ -349,3 +352,4 @@ set mouse=a
 " Directories for swap files
 set backupdir=~/.vim/backup
 set directory=~/.vim/backup
+let xml_tag_completion_map = "@"
