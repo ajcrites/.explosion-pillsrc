@@ -1,12 +1,12 @@
 #!/bin/bash
 cd $(dirname $0)
 replace=
+if [ ! -d ~/.oh-my-zsh ]; then
+   curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+   rm -f ~/.zshrc.pre-oh-my-zsh
+fi
 for f in $(find . | egrep -v \.git\|README\|infect\|defect); do
    f=${f:2}
-   if [ ! -d ~/.oh-my-zsh ]; then
-      curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-      rm -f ~/.zshrc.pre-oh-my-zsh
-   fi
    if [ -n $f ]; then
       if [ -d $f ]; then
          if [ ! -d ~/$f ]; then
