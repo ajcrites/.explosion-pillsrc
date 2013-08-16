@@ -1,10 +1,8 @@
-PROMPT='%{$fg_bold[red]%}%n@%{$fg_bold[green]%}%m %{$fg[cyan]%}%~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-
-randomise_prompt_colour () {
+randomize_prompt_color () {
    PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}mob %{$fg_bold[cyan]%}%~ %{$fg_bold[red]%}%(!.#.\$) %{$reset_color%}"
 }
 
-add-zsh-hook precmd randomise_prompt_colour
+add-zsh-hook precmd randomize_prompt_color
 
 ZSH_THEME_GIT_PROMPT_PREFIX="git:(%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"

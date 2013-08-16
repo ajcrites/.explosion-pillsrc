@@ -3,9 +3,13 @@ cd $(dirname $0)
 replace=
 for f in $(find . | egrep -v \.git\|README\|infect\|defect); do
    f=${f:2}
+   if [ ! -d ~/.oh-my-zsh ]; then
+      curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+      rm -f ~/.zshrc.pre-oh-my-zsh
+   fi
    if [ -n $f ]; then
       if [ -d $f ]; then
-         if [ ! -d ~/$f ];then
+         if [ ! -d ~/$f ]; then
             echo "directory $f does not exist.  Create now? (y)es, (n)o"
             read -s -n1 ch
             case $ch in

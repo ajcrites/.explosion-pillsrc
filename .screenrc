@@ -11,10 +11,9 @@
 bindkey -k k4 split
 bindkey -k k5 focus
 bindkey -k k6 only
-bindkey -k k7 remove
 bindkey -k k8 kill
 bindkey -k k9 screen
-bindkey -k k; title
+bindkey -k k7 title
 bindkey -k F1 prev
 bindkey -k F2 next
 

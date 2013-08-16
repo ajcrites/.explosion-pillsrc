@@ -206,8 +206,10 @@ map <C-w>; <C-w><Right>
 map fd <Esc><Home>/{<Return><C-l>d%dd
 
 "Create matching braces
-imap {{ {<Esc>o}<Up><Esc>o
-imap {( {<Esc>o});<Up><Esc>o<Tab>
+inoremap {{ {<Esc>o}<Up><Esc>o
+inoremap {; {<Esc>o};<Up><Esc>o
+inoremap {( {<Esc>o})<Up><Esc>o
+inoremap (; {<Esc>o});<Up><Esc>o
 inoremap 2{ {{}}<Left><Left>
 
 "Created matches for building arrays, functions, etc.
@@ -275,16 +277,12 @@ inoremap /purp <Esc>:set<Space>paste<CR>i
 \ */<Esc>:set<Space>nopaste<CR>`q<S-a>
 
 "Comments
-imap //* /**<CR><Space>*<CR>*/<Up><End><Space>
-"inoremap /@ /**#@+<CR>/**#@-*/<Up><End><CR><Space>*<Space>
 inoremap /+ /**#@+
 inoremap /- /**#@-*/
 
 "tag macros
 "Create tag from what was just typed; move to edit contents
-imap tagit <ESC>jT<Right>
 "Create tag with newlines and indent
-imap tagot tagit<CR><ESC><Up>A<CR><Tab>
 
 "Create tag from what was just typed; move to edit attributes
 imap tagat <ESC>jT
@@ -302,6 +300,7 @@ imap Cousre Course
 imap functino function
 imap functoin function
 imap funciton function
+imap funcion function
 imap multipe multiple
 imap codE> code>
 imap 4_ $_
@@ -353,3 +352,6 @@ set mouse=a
 set backupdir=~/.vim/backup
 set directory=~/.vim/backup
 let xml_tag_completion_map = "@"
+
+set colorcolumn=80
+autocmd BufEnter *.md set colorcolumn=60

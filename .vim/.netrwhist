@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/home/ajcrites/httpd-expose/html/misc/_remote/expo'
-let g:netrw_dirhist_2='/home/ajcrites/httpd-expose/html/misc/_remote'
-let g:netrw_dirhist_3='/home/albyrd/httpd-iatc-intro/httpd'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/acrites/.oh-my-zsh/plugins/git-flow-avh'
+let g:netrw_dirhist_2='/home/acrites/.config'
+let g:netrw_dirhist_3='/home/acrites/projects/resource-manager'
+let g:netrw_dirhist_4='/home/acrites/.vim/snippets'
+let g:netrw_dirhist_5='/home/acrites/projects/resource-manager/public/css'
