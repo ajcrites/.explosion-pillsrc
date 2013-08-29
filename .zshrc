@@ -40,7 +40,7 @@ ZSH_THEME="ajcrites"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow node npm supervisor mongo)
+plugins=(git git-flow node npm supervisor mongo django)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_aliases

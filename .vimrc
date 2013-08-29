@@ -21,6 +21,7 @@ retab               " force all Tab characters to match current Tab preferences
 
 "set list listchars=tab:**
 autocmd FileType spec set filetype=xml
+autocmd BufEnter *.zsh-theme set filetype=sh
 
 autocmd BufEnter * set shiftwidth=3 tabstop=3 softtabstop=3
 

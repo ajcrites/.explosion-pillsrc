@@ -66,3 +66,9 @@ alias gd="git diff | colordiff | less -R"
 #js
 alias js="java -jar ~/tools/rhino1_7R4/js.jar"
 alias jslint="java -jar ~/tools/jslint4java-2.0.3/jslint4java-2.0.3.jar --browser --indent 3 --predef '\$'"
+
+#skype crashes
+alias skype="LD_PRELOAD=/usr/lib/i386-linux-gnu/mesa/libGL.so.1 skype &"
+
+#django
+alias djm="python manage.py"

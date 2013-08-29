@@ -1,5 +1,12 @@
 randomize_prompt_color () {
-   PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}mob %{$fg_bold[cyan]%}%~ %{$fg_bold[red]%}%(!.#.\$) %{$reset_color%}"
+   git=$(git_prompt_info)
+   if [ -n "$git" ]; then
+      git="$git "
+   fi
+   PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}mob %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[red]%}%(!.#.\$) %{$reset_color%}"
+   if [ -n "$VIRTUAL_ENV" ]; then
+      PROMPT="(pyvenv: $(basename $VIRTUAL_ENV)) $PROMPT"
+   fi
 }
 
 add-zsh-hook precmd randomize_prompt_color
