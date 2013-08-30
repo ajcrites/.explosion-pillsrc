@@ -14,5 +14,11 @@ function see {
    test -r $1 && echo "File exists"
 }
 
+#Does: create a feature branch in git with required info
+#Used: to create such a branch
+function gfs {
+   git flow feature start $USER/$(date +%y%m%d)-$@
+}
+
 #Include local functions, if available
 [ -f ~/.bash_functions_here ] && . ~/.bash_functions_here

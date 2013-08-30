@@ -23,17 +23,17 @@ retab               " force all Tab characters to match current Tab preferences
 autocmd FileType spec set filetype=xml
 autocmd BufEnter *.zsh-theme set filetype=sh
 
-autocmd BufEnter * set shiftwidth=3 tabstop=3 softtabstop=3
+autocmd BufEnter * set shiftwidth=4 tabstop=4 softtabstop=4
 
-autocmd BufEnter *.php  set shiftwidth=3 tabstop=3 softtabstop=3
+autocmd BufEnter *.php  set shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufEnter */Desktop/* set shiftwidth=8 tabstop=8 softtabstop=8
-autocmd BufEnter *.py   set shiftwidth=3 tabstop=3 softtabstop=3
-autocmd BufEnter *.html set shiftwidth=3 tabstop=3 softtabstop=3
-autocmd BufEnter *.css  set shiftwidth=3 tabstop=3 softtabstop=3
+autocmd BufEnter *.py   set shiftwidth=4 tabstop=4 softtabstop=4
+autocmd BufEnter *.html set shiftwidth=4 tabstop=4 softtabstop=4
+autocmd BufEnter *.css  set shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufEnter *.sql  set shiftwidth=2 tabstop=2 softtabstop=2
 
-autocmd BufEnter *.xml  set shiftwidth=3 tabstop=3 softtabstop=3
-autocmd BufEnter *.spec set shiftwidth=3 tabstop=3 softtabstop=3
+autocmd BufEnter *.xml  set shiftwidth=4 tabstop=4 softtabstop=4
+autocmd BufEnter *.spec set shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufEnter *.xsl  set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter *.xsd  set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter *.java set shiftwidth=2 tabstop=2 softtabstop=2
@@ -356,3 +356,7 @@ let xml_tag_completion_map = "@"
 
 set colorcolumn=80
 autocmd BufEnter *.md set colorcolumn=60
+
+" Easymotion
+let g:EasyMotion_mapping_j = '<Leader><Leader>k'
+let g:EasyMotion_mapping_k = '<Leader><Leader>l'
