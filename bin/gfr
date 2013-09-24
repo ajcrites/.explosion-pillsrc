@@ -1,0 +1,13 @@
+#!/bin/bash -e
+#
+#Does: git flow-based rebase + finish based off origin for the current branch
+#Used: finish a git branch
+
+current_branch=$(git branch --no-color | \grep '^\* ' | \grep -v 'no branch' | sed 's/^* //g')
+develop_branch=$(git config --get gitflow.branch.develop)
+
+git checkout $develop_branch
+git pull
+git rebase $develop_branch $current_branch
+git flow feature finish ${current_branch#feature/}
+git branch -D $current_branch
