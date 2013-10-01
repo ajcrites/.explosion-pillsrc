@@ -1,5 +1,7 @@
 " @File              : .vimrc for ajcrites
 
+" 256 colors
+set t_Co=256
 call pathogen#infect()
 
 set nu               " Set line numbering
@@ -12,11 +14,12 @@ set smartindent      " Smartindentation on
 set showmatch        " Blink back to closing bracket (using % key)
 
 "set tabstop=3        " Set Tab size @gleim
-set expandtab        " Expand Tabs (pressing Tab inserts spaces)
+set noexpandtab        " Expand Tabs (pressing Tab inserts spaces)
 "set shiftwidth=3     " Number of spaces to use for each step of (auto)indent
 "set softtabstop=3    " makes the spaces feel like real tabs; one backspace goes back 3 spaces :)
 set backspace=indent,eol,start   " allow backspacing over everything in insert mode
 set list listchars=tab:>-
+
 retab               " force all Tab characters to match current Tab preferences
 
 "set list listchars=tab:**
@@ -183,12 +186,9 @@ highlight Badspace ctermfg=red ctermbg=red
 au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link customBadWhitespace Error
 
 "Quirky mappings
-map j <Left>
-map k <Down>
 nnoremap K i<CR><Esc>
-map l <Up>
-map ; <Right>
 map , <PageDown>
+map . <PageUp>
 "Prevent pause on dd waiting for dt/df
 noremap dd dd
 noremap dt dt
@@ -196,12 +196,11 @@ noremap yy yy
 noremap yt yt
 noremap df df
 noremap t .
-map . <PageUp>
 map f 5
-map <C-w>j <C-w><Left>
-map <C-w>k <C-w><Down>
-map <C-w>l <C-w><Up>
-map <C-w>; <C-w><Right>
+map <C-w>h <C-w><Left>
+map <C-w>j <C-w><Down>
+map <C-w>k <C-w><Up>
+map <C-w>l <C-w><Right>
 
 "Delete a function or a loop
 map fd <Esc><Home>/{<Return><C-l>d%dd
@@ -247,44 +246,6 @@ nnoremap <C-l> :nohl<CR>
 "Quick spli navigation
 nnoremap <C-s> :sp
 
-"Proprietary Rights Notice macro
-inoremap /prop <Esc>mqggo<CR><Esc>:set<Space>paste<CR>i
-\/* PROPRIETARY RIGHTS NOTICE<CR>
-\ *  This material contains valuable proprietary and trade secret<CR>
-\ *  information of Gleim Publications, Inc. of Gainesville, Florida.<CR>
-\ *  Except in the furtherance of the business activities of Gleim<CR>
-\ *  Publications, Inc., no part of such information may be disclosed, used,<CR>
-\ *  reproduced or transmitted in any form or by any means - electronic,<CR>
-\ *  mechanical, optical or otherwise including photocopying and recording<CR>
-\ *  in connection with any processing, storage or retrieval system -<CR>
-\ *  without prior written permission from Gleim Publications, Inc.<CR>
-\ *<CR>
-\ * COPYRIGHT NOTICE<CR>
-\ *  Copyright <C-R>=strftime("%Y")<CR> by Gleim Publications, Inc. and/or Gleim Internet, Inc.<CR>
-\ *  All worldwide rights reserved.<CR>
-\ *<CR>
-\ *  4201 NW 95th Boulevard<CR>
-\ *  Gainesville, FL  32606<CR>
-\ */<Esc>:set<Space>nopaste<CR>`q
-map &prop i/prop
-
-"PHPDoc Macros
-inoremap /purp <Esc>:set<Space>paste<CR>i
-\/**<CR>
-\ * The purpose of this file is to  <Esc>mqi<CR>
-\ * @author Andrew Crites <andrew@gleim.com><CR>
-\ * @copyright <C-R>=strftime("%Y")<CR><CR>
-\ * @package<CR>
-\ */<Esc>:set<Space>nopaste<CR>`q<S-a>
-
-"Comments
-inoremap /+ /**#@+
-inoremap /- /**#@-*/
-
-"tag macros
-"Create tag from what was just typed; move to edit contents
-"Create tag with newlines and indent
-
 "Create tag from what was just typed; move to edit attributes
 imap tagat <ESC>jT
 "Gut a tag on the line (might not want to use this one if you have more than one tag on the line)
@@ -308,6 +269,7 @@ imap 4_ $_
 imap if( if<Space>(
 imap Gliem Gleim
 imap breka break
+imap lenght length
 
 function! DashToggle()
    echo &iskeyword
@@ -352,7 +314,11 @@ set mouse=a
 " Directories for swap files
 set backupdir=~/.vim/backup
 set directory=~/.vim/backup
+
+" xml editing
 let xml_tag_completion_map = "@"
+inoremap =" =""<Left>
+inoremap =' =''<Left>
 
 set colorcolumn=80
 autocmd BufEnter *.md set colorcolumn=60
@@ -360,3 +326,11 @@ autocmd BufEnter *.md set colorcolumn=60
 " Easymotion
 let g:EasyMotion_mapping_j = '<Leader><Leader>k'
 let g:EasyMotion_mapping_k = '<Leader><Leader>l'
+
+" Gundo
+nnoremap <F5> :GundoToggle<CR>
+
+let g:UltiSnipsExpandTrigger = '<C-J>'
+
+set exrc
+set secure

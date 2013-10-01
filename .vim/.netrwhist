@@ -1,7 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/home/acrites/.oh-my-zsh/plugins/git-flow-avh'
-let g:netrw_dirhist_2='/home/acrites/.config'
-let g:netrw_dirhist_3='/home/acrites/projects/resource-manager'
-let g:netrw_dirhist_4='/home/acrites/.vim/snippets'
-let g:netrw_dirhist_5='/home/acrites/projects/resource-manager/public/css'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/ajcrites/.vim/bundle/vim-endwise'
+let g:netrw_dirhist_2='/home/ajcrites/projects/odjfs_web/odjfsFrontEnd/src/main/webapp/js'
+let g:netrw_dirhist_3='/home/ajcrites/projects/odjfs_web/odjfsFrontEnd'
+let g:netrw_dirhist_4='/home/ajcrites/projects/odjfs_web/odjfsFrontEnd/src'
+let g:netrw_dirhist_5='/home/ajcrites/projects/odjfs_web/odjfsFrontEnd/src/main/webapp'
+let g:netrw_dirhist_6='/home/ajcrites/projects/odjfs_web/odjfsFrontEnd/src/main/webapp/js/directive'
+let g:netrw_dirhist_7='/home/ajcrites/.vim/bundle/vim-multiple-cursors'
+let g:netrw_dirhist_8='/home/ajcrites/projects/odjfs_web/odjfsFrontEnd/src/main/webapp/js'

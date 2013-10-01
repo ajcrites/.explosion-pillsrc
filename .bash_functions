@@ -17,7 +17,7 @@ function see {
 #Does: create a feature branch in git with required info
 #Used: to create such a branch
 function gfs {
-   git flow feature start $USER/$(date +%y%m%d)-$@
+   git flow feature start $(date +%m%d%y)_$@
 }
 
 #Include local functions, if available

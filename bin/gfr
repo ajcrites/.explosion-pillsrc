@@ -10,4 +10,12 @@ git checkout $develop_branch
 git pull
 git rebase $develop_branch $current_branch
 git flow feature finish ${current_branch#feature/}
-git branch -D $current_branch
+
+read -p"Delete local branch? (y/n)" -n1 delete_branch
+case $s in
+    y)
+        git branch -D $current_branch
+        echo "Branch deleted";;
+    *)
+        echo "Branch not deleted";;
+esac

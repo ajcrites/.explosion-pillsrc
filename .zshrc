@@ -46,8 +46,15 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_aliases
 source $HOME/.bash_functions
 
-# Customize to your needs...
-export PATH=$PATH:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/bin
-
 set +o HIST_VERIFY
 export EDITOR=vim
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# Liberty
+export WLP_INSTALL="$HOME/util/liberty/wlp"
+
+# Customize to your needs...
+export PATH=$PATH:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/bin:$WLP_INSTALL/bin
+
