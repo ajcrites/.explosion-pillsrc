@@ -52,3 +52,5 @@ export MANPATH=$MANPATH:~/man
 export MANPATH=$(echo "$MANPATH" |tr ':' '\n' | sort -u | sed '/^\s*$/d' | tr '\n' ':')
 export LANG="en_US.utf-8"
 export LC_ALL="en_US.utf-8"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

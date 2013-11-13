@@ -14,11 +14,16 @@ set smartindent      " Smartindentation on
 set showmatch        " Blink back to closing bracket (using % key)
 
 "set tabstop=3        " Set Tab size @gleim
-set noexpandtab        " Expand Tabs (pressing Tab inserts spaces)
+set expandtab        " Expand Tabs (pressing Tab inserts spaces)
 "set shiftwidth=3     " Number of spaces to use for each step of (auto)indent
 "set softtabstop=3    " makes the spaces feel like real tabs; one backspace goes back 3 spaces :)
 set backspace=indent,eol,start   " allow backspacing over everything in insert mode
 set list listchars=tab:>-
+
+" tabs generally used for work projects
+autocmd BufEnter /home/ajcrites/projects/mobq/* set noexpandtab
+autocmd BufEnter /home/ajcrites/projects/mobq/* set nolist
+
 
 retab               " force all Tab characters to match current Tab preferences
 
@@ -41,6 +46,8 @@ autocmd BufEnter *.xsl  set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter *.xsd  set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter *.java set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter *.md set shiftwidth=4 tabstop=4 softtabstop=4
+
+autocmd BufEnter /home/ajcrites/projects/personal/AWESOM-0/* set softtabstop=2 tabstop=2
 
 "Remember last line after opening file (from /etc/vim/vimrc
 if has("autocmd")
@@ -210,6 +217,7 @@ inoremap {{ {<Esc>o}<Up><Esc>o
 inoremap {; {<Esc>o};<Up><Esc>o
 inoremap {( {<Esc>o})<Up><Esc>o
 inoremap (; {<Esc>o});<Up><Esc>o
+inoremap {, {<Esc>o},<Up><Esc>o
 inoremap 2{ {{}}<Left><Left>
 
 "Created matches for building arrays, functions, etc.
@@ -270,6 +278,8 @@ imap if( if<Space>(
 imap Gliem Gleim
 imap breka break
 imap lenght length
+imap reutrn return
+imap retrun return
 
 function! DashToggle()
    echo &iskeyword
@@ -286,10 +296,10 @@ nmap sp :set paste!<CR>
 nmap sd :call DashToggle()<CR>
 nmap sn :set nonumber!<CR>
 nmap ss :set spell!<CR>
+nmap sh <C-w>h
 nmap sj <C-w>j
 nmap sk <C-w>k
 nmap sl <C-w>l
-nmap s; <C-w>;
 nmap <TAB> i<TAB>
 "imap cb <Space><Esc>dbxi
 
@@ -317,15 +327,13 @@ set directory=~/.vim/backup
 
 " xml editing
 let xml_tag_completion_map = "@"
+inoremap ==" =""<Space><Left><Left>
+inoremap ==' =''<Space><Left><Left>
 inoremap =" =""<Left>
 inoremap =' =''<Left>
 
 set colorcolumn=80
 autocmd BufEnter *.md set colorcolumn=60
-
-" Easymotion
-let g:EasyMotion_mapping_j = '<Leader><Leader>k'
-let g:EasyMotion_mapping_k = '<Leader><Leader>l'
 
 " Gundo
 nnoremap <F5> :GundoToggle<CR>
