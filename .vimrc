@@ -170,11 +170,12 @@ function! SlashComment()
 endfunction
 
 " And then later... - or _
-autocmd FileType perl      call PoundComment()
-autocmd FileType sh        call PoundComment()
-autocmd FileType php       call SlashComment()
-autocmd FileType php       call WriteTags()
-autocmd FileType java      call SlashComment()
+autocmd FileType perl       call PoundComment()
+autocmd FileType sh         call PoundComment()
+autocmd FileType php        call SlashComment()
+autocmd FileType javascript call SlashComment()
+autocmd FileType php        call WriteTags()
+autocmd FileType java       call SlashComment()
 
 "Write the opening and closing php tags to an empty file
 fu! WriteTags()

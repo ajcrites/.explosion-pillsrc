@@ -1,0 +1,32 @@
+[user]
+	email = acrites@mobiquityinc.com
+	name = Andrew Crites
+
+[github]
+	user = ajcrites
+
+[heroku]
+	user = ajcrites
+
+[push]
+	default = current
+
+[pull]
+	default = current
+
+[hub]
+	host = mobiquityinc.com
+
+[color]
+	ui = auto
+
+[color "branch"]
+	remote = red
+
+[color "status"]
+	added = green
+	untracked = cyan
+	removed = red
+
+[color "diff"]
+	whitespace = red reverse

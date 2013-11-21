@@ -57,12 +57,11 @@ alias grep="ack"
 #list files after grep and strip colors; this works surprisingly well
 alias list="cut -d':' -f1 | sort -u | b"
 
-#git
-alias gd="git diff | colordiff | less -R"
-
 #github
-alias git=hub
-compdef hub=git
+if [ -n $(/bin/which hub) ]; then
+    alias git=hub
+    compdef hub=git
+fi
 
 #Keep some aliases on the server .. alone
 [ -f ~/.bash_aliases_here ] && . ~/.bash_aliases_here
@@ -76,3 +75,6 @@ alias skype="LD_PRELOAD=/usr/lib/i386-linux-gnu/mesa/libGL.so.1 skype > /dev/nul
 
 #django
 alias djm="python manage.py"
+
+#undoing plugin aliases
+unalias gd
