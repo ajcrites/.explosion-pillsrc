@@ -220,6 +220,7 @@ inoremap {( {<Esc>o})<Up><Esc>o
 inoremap (; {<Esc>o});<Up><Esc>o
 inoremap {, {<Esc>o},<Up><Esc>o
 inoremap 2{ {{}}<Left><Left>
+inoremap {% {%%}<Left><Left>
 
 "Created matches for building arrays, functions, etc.
 imap [' ['']<Left><Left>

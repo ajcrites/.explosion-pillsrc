@@ -3,7 +3,7 @@ randomize_prompt_color () {
    if [ -n "$git" ]; then
       git="$git "
    fi
-   PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}mob %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[red]%}%(!.#.\$) %{$reset_color%}"
+   PROMPT="%{$fg_bold[green]%}andrew%F{$((RANDOM % 8))}@%{$fg[magenta]%}???? %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[red]%}%(!.#.\$) %{$reset_color%}"
    if [ -n "$VIRTUAL_ENV" ]; then
       PROMPT="(pyvenv: $(basename $VIRTUAL_ENV)) $PROMPT"
    fi

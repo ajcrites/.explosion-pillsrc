@@ -20,5 +20,12 @@ function gfs {
    git flow feature start $(date +%m%d%y)_$@
 }
 
+#Does: search history
+#Used: to search history for the command
+function hs {
+    noglob fc -l -m "$1*" 1
+    noglob fc -l -m "sudo $1*" 1
+}
+
 #Include local functions, if available
 [ -f ~/.bash_functions_here ] && . ~/.bash_functions_here

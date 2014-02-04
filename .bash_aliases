@@ -58,10 +58,7 @@ alias grep="ack"
 alias list="cut -d':' -f1 | sort -u | b"
 
 #github
-if [ -n $(/bin/which hub) ]; then
-    alias git=hub
-    compdef hub=git
-fi
+compdef hub=git
 
 #Keep some aliases on the server .. alone
 [ -f ~/.bash_aliases_here ] && . ~/.bash_aliases_here
