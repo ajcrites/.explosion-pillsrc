@@ -75,3 +75,9 @@ alias djm="python manage.py"
 
 #undoing plugin aliases
 unalias gd
+
+#mt
+alias kilall=killall
+
+#standup
+alias stup="vim $(date --date=tomorrow +%Y-%m-%d).md"

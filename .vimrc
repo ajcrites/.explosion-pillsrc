@@ -21,14 +21,14 @@ set backspace=indent,eol,start   " allow backspacing over everything in insert m
 set list listchars=tab:>-
 
 " tabs generally used for work projects
-autocmd BufEnter /home/ajcrites/projects/mobq/* set noexpandtab
-autocmd BufEnter /home/ajcrites/projects/mobq/* set nolist
+autocmd BufEnter /home/ajcrites/projects/mobq/* set noexpandtab nolist
 
 
 retab               " force all Tab characters to match current Tab preferences
 
 "set list listchars=tab:**
 autocmd FileType spec set filetype=xml
+autocmd BufEnter *.go set filetype=go
 autocmd BufEnter *.zsh-theme set filetype=sh
 
 autocmd BufEnter * set shiftwidth=4 tabstop=4 softtabstop=4
@@ -48,6 +48,7 @@ autocmd BufEnter *.java set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter *.md set shiftwidth=4 tabstop=4 softtabstop=4
 
 autocmd BufEnter /home/ajcrites/projects/personal/AWESOM-0/* set softtabstop=2 tabstop=2
+autocmd BufEnter /home/ajcrites/projects/mobq/mpm/* set softtabstop=2 tabstop=2 shiftwidth=2 expandtab list
 
 "Remember last line after opening file (from /etc/vim/vimrc
 if has("autocmd")
