@@ -1,12 +1,18 @@
+# git
 [user]
 	email = acrites@mobiquityinc.com
 	name = Andrew Crites
 
-[github]
-	user = ajcrites
+[core]
+	editor = vim
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	excludesfile = /home/ajcrites/.gitignore
 
-[heroku]
-	user = ajcrites
+[color]
+	ui = true
+
+[color "diff"]
+	whitespace = red reverse
 
 [push]
 	default = current
@@ -14,23 +20,25 @@
 [pull]
 	default = current
 
+[alias]
+	pul = pull
+	ci = commit
+	co = checkout
+	st = status
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	d = checkout develop
+	done = pull --rebase origin develop
+	p = !git --no-pager
+
+[rebase]
+	autosquash = true
+
+# Non-git
+[github]
+	user = ajcrites
+
+[heroku]
+	login = ajcrites
+
 [hub]
 	host = mobiquityinc.com
-
-[color]
-	ui = auto
-
-[color "branch"]
-	remote = red
-
-[color "status"]
-	added = green
-	untracked = cyan
-	removed = red
-
-[color "diff"]
-	whitespace = red reverse
-
-[alias]
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-	pul = pull

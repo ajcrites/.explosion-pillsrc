@@ -40,7 +40,7 @@ ZSH_THEME="ajcrites"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow node npm supervisor mongo django vi-mode z colored-man github heroku gem rails rake rvm rbenv)
+plugins=(git git-flow node npm supervisor mongo django vi-mode z colored-man github heroku gem rails rake rvm rbenv hub)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_aliases
@@ -58,7 +58,6 @@ export WLP_INSTALL="$HOME/util/liberty/wlp"
 export PATH=$PATH:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/bin:$WLP_INSTALL/bin
 
 # Smartcase tab completion
-#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' matcher-list 'm:{a-z0-9}={A-Z0-9}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

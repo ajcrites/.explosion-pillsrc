@@ -23,6 +23,8 @@ alias econ='vim ~/.bash_constants'
 alias evim='vim ~/.vimrc'
 alias evin='evim'
 alias ecron='crontab -e'
+alias egit='vim ~/.gitconfig'
+alias ezsh='vim ~/.zshrc'
 
 #Recursively remove files
 alias rmr='nice rm -rf'

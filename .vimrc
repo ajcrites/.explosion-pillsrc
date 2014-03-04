@@ -74,7 +74,7 @@ set bs=2             " backspace ???
 let g:vimsyn_folding='af'
 set fdm=syntax
 let php_folding=2
-let javaScript_fold=1
+let javaScript_fold=0
 " -_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 
 set background=dark  " Highlighting depends on background color (dark or light)
@@ -173,6 +173,7 @@ endfunction
 " And then later... - or _
 autocmd FileType perl       call PoundComment()
 autocmd FileType sh         call PoundComment()
+autocmd FileType py         call PoundComment()
 autocmd FileType php        call SlashComment()
 autocmd FileType javascript call SlashComment()
 autocmd FileType php        call WriteTags()
@@ -196,6 +197,8 @@ au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link c
 
 "Quirky mappings
 nnoremap K i<CR><Esc>
+nnoremap do ddO
+nnoremap dp p<Up>dd
 map , <PageDown>
 map . <PageUp>
 "Prevent pause on dd waiting for dt/df
@@ -283,6 +286,7 @@ imap breka break
 imap lenght length
 imap reutrn return
 imap retrun return
+imap $> %>
 
 function! DashToggle()
    echo &iskeyword
@@ -345,3 +349,7 @@ let g:UltiSnipsExpandTrigger = '<C-J>'
 
 set exrc
 set secure
+let g:ycm_min_num_of_chars_for_completion = 99
+
+" Folding is over!
+set nofoldenable
