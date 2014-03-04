@@ -1,5 +1,6 @@
 #!/bin/sh -e
 # Current git branch
 
+# works better for suppressing lack of initial commit output
 git rev-parse --is-inside-work-tree 2>/dev/null > /dev/null
-git rev-parse --abbrev-ref HEAD
+git symbolic-ref -q --short HEAD
