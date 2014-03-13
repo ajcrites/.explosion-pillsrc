@@ -201,12 +201,14 @@ nnoremap do ddO
 nnoremap dp p<Up>dd
 map , <PageDown>
 map . <PageUp>
+nnoremap ' <Right>x
 "Prevent pause on dd waiting for dt/df
 noremap dd dd
 noremap dt dt
 noremap yy yy
 noremap yt yt
 noremap df df
+noremap ct ct
 noremap t .
 map f 5
 map <C-w>h <C-w><Left>

@@ -55,6 +55,7 @@ alias py="python"
 
 #ack
 alias grep="ack"
+alias hs=". ~/bin/hs"
 
 #list files after grep and strip colors; this works surprisingly well
 alias list="cut -d':' -f1 | sort -u | b"
@@ -82,4 +83,7 @@ unalias gd
 alias kilall=killall
 
 #standup
-alias stup="vim $(date --date=tomorrow +%Y-%m-%d).md"
+alias stup='vim $(date --date=tomorrow +%Y-%m-%d).md'
+
+#git
+alias gitcd='cd $(git rev-parse --show-toplevel)'

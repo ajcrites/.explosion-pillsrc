@@ -7,6 +7,10 @@ if [ ! -d ~/.oh-my-zsh ]; then
 fi
 for f in $(find . | egrep -v \.git\|README\|infect\|defect); do
    f=${f:2}
+   # copy potentially overloaded git files
+   if [[ "$f" =~ ".explosion-pills.git" ]]; then
+      f=${f/.explosion-pills}
+   fi
    if [ -n $f ]; then
       if [ -d $f ]; then
          if [ ! -d ~/$f ]; then

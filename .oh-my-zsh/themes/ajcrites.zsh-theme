@@ -7,7 +7,7 @@ create_prompt () {
    if [ -n "$git" ]; then
       git="$git "
    fi
-   PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}mob %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[red]%}%(!.#.\$) %{$reset_color%}"
+   PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}???? %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[red]%}%(!.#.\$) %{$reset_color%}"
    if [ -n "$VIRTUAL_ENV" ]; then
       PROMPT="(pyvenv: $(basename $VIRTUAL_ENV)) $PROMPT"
    fi
@@ -43,9 +43,29 @@ git() {
         # colored man for git
         man "git-$2"
     elif (( $_has_working_hub )); then
-        hub "$@"
+        oper="hub"
     else
-        command git "$@"
+        oper="command git"
+    fi
+
+    if [ -n $oper ]; then
+        if [[ "$1" == "checkout" || "$1" == "co" || "$1" == "d" ]]; then
+            export PREVIOUS_BRANCH=$(curb)
+            if [[ "$1" == "d" ]]; then
+                $oper checkout develop
+            else
+                shift
+                $oper checkout "$@"
+            fi
+        else
+            typeset -r git_alias="git-$1"
+            if 'which' "$git_alias" >/dev/null 2>&1; then
+                shift
+                "$git_alias" "$@"
+            else
+                $oper "$@"
+            fi
+        fi
     fi
 }
 
