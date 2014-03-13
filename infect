@@ -5,12 +5,9 @@ if [ ! -d ~/.oh-my-zsh ]; then
    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
    rm -f ~/.zshrc.pre-oh-my-zsh
 fi
-for f in $(find . | egrep -v \.git\|README\|infect\|defect); do
+for f in $(find . | egrep -v '\.git|README|infect|defect'); do
    f=${f:2}
    # copy potentially overloaded git files
-   if [[ "$f" =~ ".explosion-pills-git" ]]; then
-      f=${f/.explosion-pills-/.}
-   fi
    if [ -n $f ]; then
       if [ -d $f ]; then
          if [ ! -d ~/$f ]; then
@@ -26,8 +23,13 @@ for f in $(find . | egrep -v \.git\|README\|infect\|defect); do
          if [ $(which $(basename $f) 2>/dev/null) ]; then
             echo "$f exists elsewhere in the path."
          fi
-         if [ -f ~/$f ]; then
-            if [ -z "$(diff $f ~/$f)" ]; then
+         if [[ "$f" =~ ".explosion-pills-git" ]]; then
+            c=~/${f/.explosion-pills-/.}
+         else
+            c=~/$f
+         fi
+         if [ -f $c ]; then
+            if [ -z "$(diff $f $c)" ]; then
                echo "$f contents are identical.  Skipping"
             elif [ ! $replace ]; then
                decide=
@@ -35,21 +37,21 @@ for f in $(find . | egrep -v \.git\|README\|infect\|defect); do
                   echo "$f already exists at the destination. Replace? (y)es, (n)o, replace (a)ll, view (d)iff"
                   read -s -n1 ch
                   case $ch in
-                     a) replace=true; cp $f ~/$f; decide=true;;
-                     y) cp $f ~/$f; decide=true;;
+                     a) replace=true; cp $f $c; decide=true;;
+                     y) cp $f $c; decide=true;;
                      n) decide=true;;
                      d)
                         [ $(which colordiff) ] && command=colordiff || command=diff
-                        $command -U0 -wbB ~/$f $f | less -R
+                        $command -U0 -wbB $c $f | less -R
                      ;;
                      *) echo "You must select (y), (n), or (a)"; exit 1;;
                   esac
                done
             else
-               cp $f ~/$f
+               cp $f $c
             fi
          else
-            cp $f ~/$f
+            cp $f $c
          fi
       fi
    fi
