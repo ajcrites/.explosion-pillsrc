@@ -1,0 +1,17 @@
+#!/bin/bash -e
+# Create a pull request for the same user with the specified branches
+
+if [ -z $1 ]; then
+    read -n1 -p "Will use current branch. (Ctrl+c to cancel)"
+    branch=$(git rev-parse --abbrev-ref HEAD)
+else
+    branch=$1
+fi
+user_or_org=${2:-Mobiquity}
+source_or_org=${3:-$user_or_org}
+
+git checkout develop
+git pull
+git rebase develop $branch
+git push origin $branch
+hub pull-request -b ${user_or_org}:develop -h ${source_or_org}:$branch

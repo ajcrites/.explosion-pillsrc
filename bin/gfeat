@@ -1,0 +1,14 @@
+#!/bin/bash -e
+# Create a git feature branch according to Mobiquity standards
+
+if [ -z $1 ]; then
+    echo -e "\e[0;31mYou must specify the jira number\e[0m"
+    exit
+fi
+branch_type=${2:-feature}
+new_branch=$branch_type/$USER/$(date +%y%m%d)-$1
+
+git checkout develop
+git pull
+git checkout -b $new_branch
+git branch --set-upstream-to=develop
