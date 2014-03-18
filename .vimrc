@@ -290,6 +290,7 @@ imap reutrn return
 imap retrun return
 imap $> %>
 
+"make `-` a word character so I can autocomplete words containing dashes
 function! DashToggle()
    echo &iskeyword
    if matchstr(&iskeyword, '-$') == '-'
@@ -327,6 +328,7 @@ map sist :s/\(\s\+\)\(.*\)/\1<li>\2<\/li><CR>:nohl<CR>
 map sidt :s/\d\+\. \(.*\)/      <li>\1<\/li><CR>:nohl<CR>
 map siat :s/\w\+\. \(.*\)/      <li>\1<\/li><CR>:nohl<CR>
 
+"mouse (in tmux)
 set ttymouse=xterm2
 set mouse=a
 

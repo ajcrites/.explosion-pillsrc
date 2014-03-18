@@ -1,18 +1,24 @@
 set_current_branch () {
-   CURRENT_BRANCH=$(curb)
+    # `curb` executable determines current branch IF in a git repo
+    CURRENT_BRANCH=$(curb)
 }
 
 create_prompt () {
-   git=$(git_prompt_info)
-   if [ -n "$git" ]; then
-      git="$git "
-   fi
-   PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}???? %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[red]%}%(!.#.\$) %{$reset_color%}"
-   if [ -n "$VIRTUAL_ENV" ]; then
-      PROMPT="(pyvenv: $(basename $VIRTUAL_ENV)) $PROMPT"
-   fi
+    git=$(git_prompt_info)
+    if [ -n "$git" ]; then
+        git="$git "
+    fi
+    # Randomize @ in prompt color
+    PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}???? %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[red]%}%(!.#.\$) %{$reset_color%}"
+    if [ -n "$VIRTUAL_ENV" ]; then
+        PROMPT="(pyvenv: $(basename $VIRTUAL_ENV)) $PROMPT"
+    fi
 }
 
+# Display three levels of changes simultaneously:
+# * untracked (red)
+# * unstaged, but tracked (yellow)
+# * staged (green)
 parse_git_dirty() {
     local GIT_DIRTY=''
 
@@ -34,10 +40,14 @@ parse_git_dirty() {
     fi
 }
 
+# Override git/hub command to allow for
+# * `git help` -- colored man
+# * PREVIOUS_BRANCH settings
+# * override of git native commands
 git() {
     if ! (( $+_has_working_hub  )); then
         hub --version &> /dev/null
-        _has_working_hub=$(($? == 0)) 
+        _has_working_hub=$(($? == 0))
     fi
     if [[ "$1" == "help" && $# > 1 ]]; then
         # colored man for git
@@ -50,6 +60,7 @@ git() {
 
     if [ -n $oper ]; then
         if [[ "$1" == "checkout" || "$1" == "co" || "$1" == "d" ]]; then
+            # set previous branch when checking out another branch
             export PREVIOUS_BRANCH=$(curb)
             if [[ "$1" == "d" ]]; then
                 $oper checkout develop
@@ -58,6 +69,7 @@ git() {
                 $oper checkout "$@"
             fi
         else
+            # allow override of git native commands
             typeset -r git_alias="git-$1"
             if 'which' "$git_alias" >/dev/null 2>&1; then
                 shift
