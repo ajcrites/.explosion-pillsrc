@@ -52,6 +52,7 @@ git() {
     if [[ "$1" == "help" && $# > 1 ]]; then
         # colored man for git
         man "git-$2"
+        return
     elif (( $_has_working_hub )); then
         oper="hub"
     else
