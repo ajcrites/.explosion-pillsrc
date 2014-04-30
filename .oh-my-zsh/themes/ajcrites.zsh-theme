@@ -9,7 +9,7 @@ create_prompt () {
         git="$git "
     fi
     # Randomize @ in prompt color
-    PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}???? %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[red]%}%(!.#.\$) %{$reset_color%}"
+    PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}mob %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[red]%}%(!.#.\$) %{$reset_color%}"
     if [ -n "$VIRTUAL_ENV" ]; then
         PROMPT="(pyvenv: $(basename $VIRTUAL_ENV)) $PROMPT"
     fi
@@ -56,7 +56,7 @@ git() {
     elif (( $_has_working_hub )); then
         oper="hub"
     else
-        oper="command git"
+        oper="git"
     fi
 
     if [ -n $oper ]; then
@@ -64,10 +64,10 @@ git() {
             # set previous branch when checking out another branch
             export PREVIOUS_BRANCH=$(curb)
             if [[ "$1" == "d" ]]; then
-                $oper checkout develop
+                command $oper checkout develop
             else
                 shift
-                $oper checkout "$@"
+                command $oper checkout "$@"
             fi
         else
             # allow override of git native commands
@@ -76,7 +76,7 @@ git() {
                 shift
                 "$git_alias" "$@"
             else
-                $oper "$@"
+                command $oper "$@"
             fi
         fi
     fi

@@ -4,3 +4,4 @@
 --type-set=spec=.spec
 --pager= LESS='FSRX' less
 --ignore-dir=node_modules
+--ignore-dir=.bower-cache

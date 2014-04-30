@@ -65,3 +65,5 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 bindkey -M viins 'ij' vi-cmd-mode
+bindkey '\e[A' history-substring-search-up
+bindkey '\e[B' history-substring-search-down
