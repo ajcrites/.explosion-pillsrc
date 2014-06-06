@@ -67,3 +67,5 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 bindkey -M viins 'ij' vi-cmd-mode
 bindkey '\e[A' history-substring-search-up
 bindkey '\e[B' history-substring-search-down
+
+[[ -s "/home/ajcrites/.nvm/nvm.sh" ]] && . "/home/ajcrites/.nvm/nvm.sh" # This loads nvm

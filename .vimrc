@@ -120,7 +120,6 @@ map   <F6>     zfa{
 " Unfold a block of code
 map   <F7>     zo
 
-"map   <F7>     :call SetSpace2() <CR>
 "map   <F8>     :set nopaste!           " Set nopaste?
 "map   <F3>     :Sexplore <CR>          " Load file
 
@@ -187,10 +186,6 @@ fu! WriteTags()
   endif
 endfunction
 
-function SetSpace2()
-  set shiftwidth=2 tabstop=2 softtabstop=2
-endfunction
-
 colorscheme andy
 
 highlight Badspace ctermfg=red ctermbg=red
@@ -249,6 +244,7 @@ imap cfar cron_mfar
 map Z o<Esc>
 
 imap fnc function<Space>()<Space>{{<Up><Home><Esc>/(<Return><C-l>i
+imap fne function<Space>()<Space>{{
 map fnc ifnc
 
 map rfnc irfnc
