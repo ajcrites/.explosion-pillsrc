@@ -40,6 +40,22 @@ parse_git_dirty() {
     fi
 }
 
+# Override npm to allow for colored man
+npm() {
+    if [[ "$1" == "help" && $# > 1 ]]; then
+        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+        LESS_TERMCAP_md=$(printf "\e[1;31m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;32m") \
+        command npm "$@"
+    else
+        command npm "$@"
+    fi
+}
+
 # Override git/hub command to allow for
 # * `git help` -- colored man
 # * PREVIOUS_BRANCH settings
@@ -91,3 +107,5 @@ ZSH_THEME_GIT_PROMPT_DIRTY_UNTRACKED="%{$fg[red]%}✗%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY_TRACKED="%{$fg_bold[yellow]%}✗%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY_STAGED="%{$fg_bold[green]%}✗%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX_START="%{$fg[blue]%})"
+
+unalias gco

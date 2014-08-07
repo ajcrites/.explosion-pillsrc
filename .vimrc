@@ -2,6 +2,7 @@
 
 " 256 colors
 set t_Co=256
+let g:pathogen_disabled = ['tern_for_vim', 'YouCompleteMe']
 call pathogen#infect()
 
 set nu               " Set line numbering
@@ -23,11 +24,11 @@ set list listchars=tab:>-
 " tabs generally used for work projects
 autocmd BufEnter /home/ajcrites/projects/mobq/* set noexpandtab nolist
 
-
 retab               " force all Tab characters to match current Tab preferences
 
 "set list listchars=tab:**
 autocmd FileType spec set filetype=xml
+autocmd BufEnter *.less set filetype=css
 autocmd BufEnter *.go set filetype=go
 autocmd BufEnter *.zsh-theme set filetype=sh
 
@@ -122,7 +123,6 @@ map   <F7>     zo
 
 "map   <F8>     :set nopaste!           " Set nopaste?
 "map   <F3>     :Sexplore <CR>          " Load file
-
 
 "map   <F9>     :echo system("php " . expand("%"))     <CR>
 "map   <F10>    :echo system("php -l " . expand("%"))  <CR>
@@ -350,7 +350,12 @@ let g:UltiSnipsExpandTrigger = '<C-J>'
 
 set exrc
 set secure
-let g:ycm_min_num_of_chars_for_completion = 99
 
 " Folding is over!
 set nofoldenable
+
+" YCM
+let g:ycm_min_num_of_chars_for_completion = 99
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt = 0
+" let g:ycm_key_invoke_completion = '<Tab>'
