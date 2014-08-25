@@ -51,6 +51,7 @@ autocmd BufEnter *.md set shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufEnter /home/ajcrites/projects/personal/AWESOM-0/* set softtabstop=2 tabstop=2
 autocmd BufEnter /home/ajcrites/projects/mobq/mpm/* set softtabstop=2 tabstop=2 shiftwidth=2 expandtab list
 autocmd BufEnter /home/ajcrites/projects/mobq/lms/* set softtabstop=3 tabstop=3 shiftwidth=3 expandtab list
+autocmd BufEnter /home/ajcrites/projects/mobq/pcp/* set softtabstop=2 tabstop=2 shiftwidth=2 expandtab list
 
 "Remember last line after opening file (from /etc/vim/vimrc
 if has("autocmd")
@@ -206,7 +207,6 @@ noremap yt yt
 noremap df df
 noremap ct ct
 noremap t .
-map f 5
 map <C-w>h <C-w><Left>
 map <C-w>j <C-w><Down>
 map <C-w>k <C-w><Up>

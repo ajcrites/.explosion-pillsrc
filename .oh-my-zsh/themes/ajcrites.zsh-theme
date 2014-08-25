@@ -21,8 +21,18 @@ create_prompt () {
 # * staged (green)
 parse_git_dirty() {
     local GIT_DIRTY=''
+    local GIT_DIR=''
 
-    cd "$(command git rev-parse --show-toplevel)"
+    GIT_DIR="$(command git rev-parse --show-toplevel)"
+    # possible bug in git -- --show-toplevel succeeds but returns an empty
+    # string in if you are inside the .git directory which causes an error
+    # with `git diff`.  If $GIT_DIR is empty, just keep going up until
+    # $GIT_DIR works or we accidentally hit root (technically shouldn't happen)
+    while [ -z "$GIT_DIR" -a "$(pwd)" != "/" ]; do
+        cd ..
+        GIT_DIR="$(command git rev-parse --show-toplevel)"
+    done
+    cd "$GIT_DIR"
     if [[ -n $(command git ls-files -o --exclude-standard) ]]; then
         GIT_DIRTY="$GIT_DIRTY$ZSH_THEME_GIT_PROMPT_DIRTY_UNTRACKED"
     fi
