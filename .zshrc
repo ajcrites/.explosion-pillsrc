@@ -51,11 +51,12 @@ export EDITOR=vim
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+export NODE_PATH="$NODE_PATH:$HOME/.npm/lib/node_modules"
 
 # Liberty
 export WLP_INSTALL="$HOME/util/liberty/wlp"
 
-export PATH=$PATH:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/bin:$WLP_INSTALL/bin
+export PATH=$PATH:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/bin:$WLP_INSTALL/bin:$HOME/.npm/bin
 
 # Smartcase tab completion
 zstyle ':completion:*' matcher-list 'm:{a-z0-9}={A-Z0-9}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -69,3 +70,5 @@ bindkey '\e[A' history-substring-search-up
 bindkey '\e[B' history-substring-search-down
 
 [[ -s "/home/ajcrites/.nvm/nvm.sh" ]] && . "/home/ajcrites/.nvm/nvm.sh" # This loads nvm
+
+alias lire="fire -r http://localhost:3000/api"

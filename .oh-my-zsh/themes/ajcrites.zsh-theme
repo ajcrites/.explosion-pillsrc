@@ -108,6 +108,7 @@ git() {
     fi
 }
 
+autoload -U add-zsh-hook
 add-zsh-hook precmd create_prompt
 add-zsh-hook precmd set_current_branch
 
