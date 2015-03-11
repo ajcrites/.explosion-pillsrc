@@ -31,6 +31,7 @@ autocmd FileType spec set filetype=xml
 autocmd BufEnter *.less set filetype=css
 autocmd BufEnter *.go set filetype=go
 autocmd BufEnter *.zsh-theme set filetype=sh
+autocmd BufEnter *.es6 set filetype=javascript
 
 autocmd BufEnter * set shiftwidth=4 tabstop=4 softtabstop=4
 
@@ -53,6 +54,8 @@ autocmd BufEnter /home/ajcrites/projects/mobq/mpm/* set softtabstop=2 tabstop=2 
 autocmd BufEnter /home/ajcrites/projects/mobq/lms/* set softtabstop=3 tabstop=3 shiftwidth=3 expandtab list
 autocmd BufEnter /home/ajcrites/projects/mobq/pcp/* set softtabstop=2 tabstop=2 shiftwidth=2 expandtab list
 autocmd BufEnter /home/ajcrites/projects/mobq/upcp/* set softtabstop=4 tabstop=4 shiftwidth=4 expandtab list
+autocmd BufEnter /home/ajcrites/projects/inmob/lms/* set softtabstop=3 tabstop=3 shiftwidth=3 expandtab list
+autocmd BufEnter /home/ajcrites/projects/mobq/comcast/* set softtabstop=2 tabstop=2 shiftwidth=2 expandtab list
 
 "Remember last line after opening file (from /etc/vim/vimrc
 if has("autocmd")
@@ -348,6 +351,9 @@ autocmd BufEnter *.md set colorcolumn=60
 nnoremap <F5> :GundoToggle<CR>
 
 let g:UltiSnipsExpandTrigger = '<C-J>'
+
+" jsx
+let g:jsx_ext_required = 0
 
 set exrc
 set secure
