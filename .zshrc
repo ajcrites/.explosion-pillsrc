@@ -40,7 +40,7 @@ ZSH_THEME="ajcrites"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow node npm supervisor mongo django vi-mode z colored-man github heroku gem rails rake rvm rbenv vagrant virtualenv tmux brew bundler go history-substring-search knife pip mvn postgres python scala redis-cli web-search mercurial)
+plugins=(git git-flow node npm supervisor mongo django vi-mode z colored-man github heroku gem rails rake rvm rbenv vagrant virtualenv brew bundler go history-substring-search knife pip mvn postgres python scala redis-cli web-search mercurial hub)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_aliases
@@ -49,14 +49,11 @@ source $HOME/.bash_functions
 set +o HIST_VERIFY
 export EDITOR=vim
 
+# global node modules -- give these priority on the path
+export PATH="$HOME/.npm/bin:$PATH"
+
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-export NODE_PATH="$NODE_PATH:$HOME/.npm/lib/node_modules"
-
-# Liberty
-export WLP_INSTALL="$HOME/util/liberty/wlp"
-
-export PATH=$PATH:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/bin:$WLP_INSTALL/bin:$HOME/.npm/bin
+export PATH="$PATH:/usr/local/heroku/bin"
 
 # Smartcase tab completion
 zstyle ':completion:*' matcher-list 'm:{a-z0-9}={A-Z0-9}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -69,6 +66,4 @@ bindkey -M viins 'ij' vi-cmd-mode
 bindkey '\e[A' history-substring-search-up
 bindkey '\e[B' history-substring-search-down
 
-[[ -s "/home/ajcrites/.nvm/nvm.sh" ]] && . "/home/ajcrites/.nvm/nvm.sh" # This loads nvm
-
-alias lire="fire -r http://localhost:3000/api"
+[[ -s "$HOME/.nvm/nvm.sh" ]] && . "$HOME/.nvm/nvm.sh" # This loads nvm

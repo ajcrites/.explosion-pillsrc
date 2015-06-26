@@ -322,6 +322,7 @@ nmap gp :tabp<CR>
 
 "typing macros
 imap syso System.out.println();<Left><Left>
+imap cols console.log()<Left>
 
 "complex replacement macros
 map sinu :s/^/\=(1-line("'<")+line('.')-1) /<CR>:'<,'>s/^\(\d\+\)\(.\+\)/\1 \2/<CR>:nohl<CR>
