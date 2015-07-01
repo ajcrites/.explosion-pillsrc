@@ -1,157 +1,71 @@
 " @File              : .vimrc for ajcrites
-
-" 256 colors
 set t_Co=256
-let g:pathogen_disabled = ['tern_for_vim', 'YouCompleteMe']
 call pathogen#infect()
 
-set nu               " Set line numbering
 set nocompatible     " Not like Vi
-filetype plugin on
-
-syntax on            " Enable syntax highlighting
-set autoindent       " Autoidentation on
-set smartindent      " Smartindentation on
-set showmatch        " Blink back to closing bracket (using % key)
-
-"set tabstop=3        " Set Tab size @gleim
+set autoread         " detect when file is changed
+set ttyfast          " faster redraw
+set nolazyredraw     " don't redraw when executing macros
+set autoindent       " autoidentation on
+set smartindent      " smartindentation on
+set showmatch        " blink back to closing bracket (using % key)
+set shell=$SHELL
+set title            " terminal title
+set background=dark  " highlighting depends on background color (dark or light)
+set nowrapscan       " turn off search wrapping
+set ignorecase       " ignore case in search
+set smartcase        " consider case only when typing Uppercase
+set hlsearch         " highlight search pattern
+set vb t_vb=         " don't notify (no audio/visual bell)
+set showmode         " display mode INSERT/REPLACE/...
+set scrolloff=3      " dont let the curser get too close to the edge
+set laststatus=2     " laststatus:  show status line?  Yes, always!
+set nonumber         " no line numbers
 set expandtab        " Expand Tabs (pressing Tab inserts spaces)
-"set shiftwidth=3     " Number of spaces to use for each step of (auto)indent
-"set softtabstop=3    " makes the spaces feel like real tabs; one backspace goes back 3 spaces :)
 set backspace=indent,eol,start   " allow backspacing over everything in insert mode
-set list listchars=tab:>-
+set list listchars=tab:>-        " visual display of tabs
+set complete+=k      " dictionary scanning
+set bs=2             " backspace ???
+set exrc
+set secure
+set nofoldenable     " folding is over!
+retab                " force all Tab characters to match current Tab preferences
+filetype plugin on   " idk what this does, but it seems important
+syntax on            " Enable syntax highlighting
+set omnifunc=syntaxcomplete#Complete
 
-" tabs generally used for work projects
-autocmd BufEnter /home/ajcrites/projects/mobq/* set noexpandtab nolist
-
-retab               " force all Tab characters to match current Tab preferences
-
-"set list listchars=tab:**
 autocmd FileType spec set filetype=xml
 autocmd BufEnter *.less set filetype=css
 autocmd BufEnter *.go set filetype=go
 autocmd BufEnter *.zsh-theme set filetype=sh
 autocmd BufEnter *.es6 set filetype=javascript
+autocmd BufEnter *.es7 set filetype=javascript
+autocmd BufEnter *.php set dictionary+=/home/ajcrites/.vim/bundle/vim-explosion-pills/phpfunctions.txt
 
 autocmd BufEnter * set shiftwidth=4 tabstop=4 softtabstop=4
 
-autocmd BufEnter *.php  set shiftwidth=4 tabstop=4 softtabstop=4
-autocmd BufEnter */Desktop/* set shiftwidth=8 tabstop=8 softtabstop=8
-autocmd BufEnter *.py   set shiftwidth=4 tabstop=4 softtabstop=4
-autocmd BufEnter *.html set shiftwidth=4 tabstop=4 softtabstop=4
-autocmd BufEnter *.css  set shiftwidth=4 tabstop=4 softtabstop=4
-autocmd BufEnter *.sql  set shiftwidth=2 tabstop=2 softtabstop=2
+" project-specific indentation
+autocmd BufEnter ~/projects/mobq/kinvey/* set softtabstop=2 tabstop=2 shiftwidth=2
 
-autocmd BufEnter *.xml  set shiftwidth=4 tabstop=4 softtabstop=4
-autocmd BufEnter *.spec set shiftwidth=4 tabstop=4 softtabstop=4
-autocmd BufEnter *.xsl  set shiftwidth=2 tabstop=2 softtabstop=2
-autocmd BufEnter *.xsd  set shiftwidth=2 tabstop=2 softtabstop=2
-autocmd BufEnter *.java set shiftwidth=2 tabstop=2 softtabstop=2
-autocmd BufEnter *.md set shiftwidth=4 tabstop=4 softtabstop=4
-
-autocmd BufEnter /home/ajcrites/projects/personal/AWESOM-0/* set softtabstop=2 tabstop=2
-autocmd BufEnter /home/ajcrites/projects/mobq/mpm/* set softtabstop=2 tabstop=2 shiftwidth=2 expandtab list
-autocmd BufEnter /home/ajcrites/projects/mobq/lms/* set softtabstop=3 tabstop=3 shiftwidth=3 expandtab list
-autocmd BufEnter /home/ajcrites/projects/mobq/pcp/* set softtabstop=2 tabstop=2 shiftwidth=2 expandtab list
-autocmd BufEnter /home/ajcrites/projects/mobq/upcp/* set softtabstop=4 tabstop=4 shiftwidth=4 expandtab list
-autocmd BufEnter /home/ajcrites/projects/inmob/lms/* set softtabstop=3 tabstop=3 shiftwidth=3 expandtab list
-autocmd BufEnter /home/ajcrites/projects/mobq/comcast/* set softtabstop=2 tabstop=2 shiftwidth=2 expandtab list
-
-"Remember last line after opening file (from /etc/vim/vimrc
+" Remember last line after opening file (from /etc/vim/vimrc
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
 endif
 
-
-"source ~/.vim/php-doc.vim
-inoremap <C-P><ESC>:call PhpDocSingle()<CR>i
-nnoremap <C-P>:call PhpDocSingle()<CR>
-vnoremap <C-P>:call PhpDocRange()<CR>
-
-"source /usr/share/vim/vim70/syntax/php.vim
-" source /usr/share/vim/vim70/indent/php.vim
-set dictionary+=/home/ajcrites/.vim/bundle/vim-explosion-pills/phpfunctions.txt
-set complete-=k complete+=k
-
-set bs=2             " backspace ???
-"set spell spelllang=en_us
-" set syntax=indera " Use coloring defined in ~/.vim/syntax/indera.vim
-
 let g:vimsyn_folding='af'
-set fdm=syntax
 let php_folding=2
 let javaScript_fold=0
-" -_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-
-set background=dark  " Highlighting depends on background color (dark or light)
-
-" Turn off search wrapping
-  " 'gg' go on top and serch with '/'
-  " 'g' go at bootom and search with '?'
-set nowrapscan
-set ignorecase       " Ignore case in search
-set smartcase        " Consider case only when typing Uppercase
-"set incsearch        " Show search results when typing
-set hlsearch         " highlight search pattern
-set vb t_vb=         " don't notify (no audio/visual bell)
-set showmode         " display mode INSERT/REPLACE/...
-"set textwidth=99     " break line at 100 chars
-set scrolloff=3      " dont let the curser get too close to the edge
-set laststatus=2     " laststatus:  show status line?  Yes, always!
-set nonumber
-
-au Filetype php set spell
-au Filetype html set spell
-au Filetype xhtml set spell
-au Filetype md set spell
-au Filetype txt set spell
-
-" -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-
-map!  <F1>     <ESC>                   " F1 != Help; remove access to help :)
-map   <F1>     <ESC>
-map   <F2>     <ESC>:w                 " Save file ? (Enter for Yes)
-map   <F3>     <ESC>:q                 " Exit now ?
-
-" File name
-map   <F4>     :echo "File name: " . expand("%")      <CR>
-
-" switch lines
-"map   <F5>     ddkkp<CR>
-"map   <F6>     ddpk<CR>
-
-" Fold a block of code
-map   <F6>     zfa{
-" Unfold a block of code
-map   <F7>     zo
-
-"map   <F8>     :set nopaste!           " Set nopaste?
-"map   <F3>     :Sexplore <CR>          " Load file
-
-"map   <F9>     :echo system("php " . expand("%"))     <CR>
-"map   <F10>    :echo system("php -l " . expand("%"))  <CR>
-
-" Unhighlight search results
-" map <F10> :nohl <CR>
-
-" Switch background colors
-"map <F11> :let &background = ( &background == "dark"? "light" : "dark" ) <CR>
-" Toggle line numbering on/off
-"map <F12> :set nonumber! <CR>
-
-"map! pp <ESC>
 
 " In visual mode: TAB and Shift-TAB for indenting
 vmap <TAB>     >
 vmap <S-TAB>   <
 
-"       Example: 04.09.00 - 09:53
+" Insertion abbreviations
+" Example: 04.09.00 - 09:53
 iab YDT           <C-R>=strftime("%d.%m.%y - %H:%M")<CR>
-"       insert the current filename *without* path:
+" insert the current filename *without* path:
 iab YFILE <C-R>=expand("%:t:r")<cr>
-
-" set viminfo='10,\"100,:20,%,n~/.viminfo
 
 au BufReadPost *
 \if line("'\"") > 0 |
@@ -162,8 +76,6 @@ au BufReadPost *
 \  endif |
 \endif
 
-" Define functions
-" http://www.vim.org/tips/tip.php?tip_id=271
 function! PoundComment()
   map - :s/^/# /<CR>
   map _ :s/^\s*# \=//<CR>
@@ -175,21 +87,21 @@ function! SlashComment()
   map _ :s/^\s*\/\/ \=//<CR>   :nohlsearch<CR>
 endfunction
 
-" And then later... - or _
+"Write the opening and closing php tags to an empty file
+function! WriteTags()
+  if line("$") == 1
+    call append(0, "<?php")
+    call append(1, "?>")
+  endif
+endfunction
+
 autocmd FileType perl       call PoundComment()
 autocmd FileType sh         call PoundComment()
 autocmd FileType py         call PoundComment()
 autocmd FileType php        call SlashComment()
-autocmd FileType javascript call SlashComment()
 autocmd FileType php        call WriteTags()
+autocmd FileType javascript call SlashComment()
 autocmd FileType java       call SlashComment()
-
-"Write the opening and closing php tags to an empty file
-fu! WriteTags()
- if line("$") == 1
-    call append(0, "<?php")
-  endif
-endfunction
 
 colorscheme andy
 
@@ -197,11 +109,16 @@ highlight Badspace ctermfg=red ctermbg=red
 au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link customBadWhitespace Error
 
 "Quirky mappings
+"
+" Opposite of J -- split lines
 nnoremap K i<CR><Esc>
+" quickly delete and correctly indent current line
 nnoremap do ddO
+" replace current line with clipboard
 nnoremap dp p<Up>dd
 map , <PageDown>
 map . <PageUp>
+" <delete> key
 nnoremap ' <Right>x
 "Prevent pause on dd waiting for dt/df
 noremap dd dd
@@ -210,16 +127,18 @@ noremap yy yy
 noremap yt yt
 noremap df df
 noremap ct ct
+" t to repeat command -- . is pgup
 noremap t .
+" vim directional bindings for window switching
 map <C-w>h <C-w><Left>
 map <C-w>j <C-w><Down>
 map <C-w>k <C-w><Up>
 map <C-w>l <C-w><Right>
 
-"Delete a function or a loop
+" delete a function or a loop
 map fd <Esc><Home>/{<Return><C-l>d%dd
 
-"Create matching braces
+" create matching braces
 inoremap {{ {<Esc>o}<Up><Esc>o
 inoremap {; {<Esc>o};<Up><Esc>o
 inoremap {( {<Esc>o})<Up><Esc>o
@@ -228,67 +147,41 @@ inoremap {, {<Esc>o},<Up><Esc>o
 inoremap 2{ {{}}<Left><Left>
 inoremap {% {%%}<Left><Left>
 
-"Created matches for building arrays, functions, etc.
+" created matches for building arrays, functions, etc.
 imap [' ['']<Left><Left>
 imap [" [""]<Left><Left>
 
-"<Esc> from the home row
+" <Esc> from the home row
 imap ij <Esc>
 vmap ij <Esc>
 
-"Quickly build common loops or functions
-imap foreach foreach<Space>($)<Space>{{<Up><Home><Esc>/\$<Return><C-l>a
-map foreach iforeach
-
-imap whilel while<Space>($)<Space>{{<Up><Home><Esc>/\$<Return><C-l>a
-
-imap mfar mysql_fetch_assoc($result);
-imap cfar cron_mfar
-
+" insert newline in normal mode
 map Z o<Esc>
 
-imap fnc function<Space>()<Space>{{<Up><Home><Esc>/(<Return><C-l>i
-imap fne function<Space>()<Space>{{
-map fnc ifnc
-
-map rfnc irfnc
-map vfnc ivfnc
-
-imap vd var_dump();<Left><Left>
-imap dvd die(var_dump());<Left><Left><Left>
-
-"Quick tab navigation
+" quick unhighlight after search
 nnoremap <C-l> :nohl<CR>
 
-"Quick spli navigation
-nnoremap <C-s> :sp
+" typos
+abbr springf sprintf
+abbr rlmNAme rlmName
+abbr cousre course
+abbr Cousre Course
+abbr functino function
+abbr functoin function
+abbr funciton function
+abbr funcion function
+abbr multipe multiple
+abbr Gliem Gleim
+abbr breka break
+abbr lenght length
+abbr reutrn return
+abbr retrun return
 
-"Create tag from what was just typed; move to edit attributes
-imap tagat <ESC>jT
-"Gut a tag on the line (might not want to use this one if you have more than one tag on the line)
-imap tagut <ESC>^<Right>?<[^\/]<CR>:s/>[^<]*</></<CR><C-l>ww;i
-imap yyp <Esc>yypi
-imap yypt <Esc>yypitagut
-
-"typos
-imap springf sprintf
+" syntax mistypes
 imap <Br <br
-imap rlmNAme rlmName
-imap cousre course
-imap Cousre Course
-imap functino function
-imap functoin function
-imap funciton function
-imap funcion function
-imap multipe multiple
 imap codE> code>
 imap 4_ $_
 imap if( if<Space>(
-imap Gliem Gleim
-imap breka break
-imap lenght length
-imap reutrn return
-imap retrun return
 imap $> %>
 
 "make `-` a word character so I can autocomplete words containing dashes
@@ -301,8 +194,9 @@ function! DashToggle()
    endif
 endfunction
 
-"macros for common commands
-"s is common command mode
+" no shift key for command entering -- what does semicolon do??
+noremap ; :
+" s is common command mode
 nmap sp :set paste!<CR>
 nmap sd :call DashToggle()<CR>
 nmap sn :set nonumber!<CR>
@@ -311,26 +205,11 @@ nmap sh <C-w>h
 nmap sj <C-w>j
 nmap sk <C-w>k
 nmap sl <C-w>l
-nmap <TAB> i<TAB>
-"imap cb <Space><Esc>dbxi
 
-"moving between tabs
-nmap g0 :tabfirst<CR>
-nmap g$ :tablast<CR>
-nmap gn :tabn<CR>
-nmap gp :tabp<CR>
-
-"typing macros
+" typing macros
 imap syso System.out.println();<Left><Left>
-imap cols console.log()<Left>
 
-"complex replacement macros
-map sinu :s/^/\=(1-line("'<")+line('.')-1) /<CR>:'<,'>s/^\(\d\+\)\(.\+\)/\1 \2/<CR>:nohl<CR>
-map sist :s/\(\s\+\)\(.*\)/\1<li>\2<\/li><CR>:nohl<CR>
-map sidt :s/\d\+\. \(.*\)/      <li>\1<\/li><CR>:nohl<CR>
-map siat :s/\w\+\. \(.*\)/      <li>\1<\/li><CR>:nohl<CR>
-
-"mouse (in tmux)
+" mouse (in tmux)
 set ttymouse=xterm2
 set mouse=a
 
@@ -351,19 +230,65 @@ autocmd BufEnter *.md set colorcolumn=60
 " Gundo
 nnoremap <F5> :GundoToggle<CR>
 
-let g:UltiSnipsExpandTrigger = '<C-J>'
-
 " jsx
 let g:jsx_ext_required = 0
 
-set exrc
-set secure
+" This rewires n and N to do the highlighing...
+nnoremap <silent> n   n:call HLNext(0.4)<cr>
+nnoremap <silent> N   N:call HLNext(0.4)<cr>
 
-" Folding is over!
-set nofoldenable
+" Blink match
+function! HLNext (blinktime)
+    highlight RedOnRed ctermfg=red ctermbg=red
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    echo matchlen
+    let ring_pat = (lnum > 1 ? '\%'.(lnum-1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.\|' : '')
+            \ . '\%'.lnum.'l\%>'.max([col-4,1]) .'v\%<'.col.'v.'
+            \ . '\|'
+            \ . '\%'.lnum.'l\%>'.max([col+matchlen-1,1]) .'v\%<'.(col+matchlen+3).'v.'
+            \ . '\|'
+            \ . '\%'.(lnum+1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.'
+    let ring = matchadd('RedOnRed', ring_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 50) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
 
-" YCM
-let g:ycm_min_num_of_chars_for_completion = 99
-set completeopt-=preview
-let g:ycm_add_preview_to_completeopt = 0
-" let g:ycm_key_invoke_completion = '<Tab>'
+" When pressing tab
+"  1. If we are already autocompleting, move to next menu item
+"  2. If there is no context, insert a tab
+"  3. If there is context, do text completion
+"  4. If there is a period on the line, do context completion
+function! Smart_TabComplete()
+    if pumvisible()
+        return ""
+    endif
+    let line = getline('.')                         " current line
+
+    let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+    " line to one character right
+    " of the cursor
+    let substr = matchstr(substr, '[^ \t]*$')       " word till cursor
+    if (strlen(substr)==0)                          " nothing to match on empty string
+        return "	"
+    endif
+    let has_period = match(substr, '\.') != -1      " position of period, if any
+    if (!has_period)
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+" Shift-tab moves backwards in popup menus
+function! Smart_TabNavigation()
+    if pumvisible()
+        return ""
+    endif
+    return "	"
+endfunction
+
+inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+inoremap <s-tab> <c-r>=Smart_TabNavigation()<CR>
