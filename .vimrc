@@ -101,9 +101,11 @@ autocmd FileType py         call PoundComment()
 autocmd FileType php        call SlashComment()
 autocmd FileType php        call WriteTags()
 autocmd FileType javascript call SlashComment()
+autocmd FileType javascript nmap st :TernDoc<CR>
 autocmd FileType java       call SlashComment()
 
 colorscheme andy
+let g:airline_theme="andy"
 
 highlight Badspace ctermfg=red ctermbg=red
 au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link customBadWhitespace Error
@@ -205,9 +207,7 @@ nmap sh <C-w>h
 nmap sj <C-w>j
 nmap sk <C-w>k
 nmap sl <C-w>l
-
-" typing macros
-imap syso System.out.println();<Left><Left>
+nmap sg :Gstatus<CR>
 
 " mouse (in tmux)
 set ttymouse=xterm2
