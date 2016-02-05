@@ -89,3 +89,7 @@ alias stup='vim $(date --date=tomorrow +%Y-%m-%d).md'
 alias gitcd='cd $(git rev-parse --show-toplevel)'
 
 alias vimo='vim ${${(z)$(fc -l -1)}[3]}'
+
+#node
+alias node='node --use-strict'
+alias nod='\node'

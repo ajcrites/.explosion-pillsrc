@@ -40,7 +40,7 @@ ZSH_THEME="ajcrites"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow node npm supervisor mongo django vi-mode z colored-man github heroku gem rails rake rvm rbenv vagrant virtualenv brew tmux bundler go history-substring-search knife pip mvn postgres python scala redis-cli web-search mercurial hub karma)
+plugins=(git git-flow node npm supervisor mongo django vi-mode z colored-man heroku gem rails rake rvm rbenv vagrant virtualenv brew tmux bundler go history-substring-search knife pip mvn postgres python scala redis-cli web-search mercurial hub karma gulp docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_aliases
@@ -67,3 +67,6 @@ bindkey '\e[A' history-substring-search-up
 bindkey '\e[B' history-substring-search-down
 
 [[ -s "$HOME/.nvm/nvm.sh" ]] && . "$HOME/.nvm/nvm.sh" # This loads nvm
+nvm use 5
+
+eval "$(fasd --init auto)"

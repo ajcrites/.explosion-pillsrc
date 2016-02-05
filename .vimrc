@@ -40,12 +40,16 @@ autocmd BufEnter *.go set filetype=go
 autocmd BufEnter *.zsh-theme set filetype=sh
 autocmd BufEnter *.es6 set filetype=javascript
 autocmd BufEnter *.es7 set filetype=javascript
+autocmd BufEnter *.apib set filetype=markdown
 autocmd BufEnter *.php set dictionary+=/home/ajcrites/.vim/bundle/vim-explosion-pills/phpfunctions.txt
+autocmd BufEnter *.yml set shiftwidth=2 tabstop=2 softtabstop=2
+autocmd BufEnter *.go set noexpandtab
 
 autocmd BufEnter * set shiftwidth=4 tabstop=4 softtabstop=4
 
 " project-specific indentation
 autocmd BufEnter ~/projects/mobq/kinvey/* set softtabstop=2 tabstop=2 shiftwidth=2
+autocmd BufEnter ~/projects/mobq/aliro-platform/* set softtabstop=2 tabstop=2 shiftwidth=2
 
 " Remember last line after opening file (from /etc/vim/vimrc
 if has("autocmd")
@@ -261,26 +265,33 @@ endfunction
 "  2. If there is no context, insert a tab
 "  3. If there is context, do text completion
 "  4. If there is a period on the line, do context completion
-function! Smart_TabComplete()
-    if pumvisible()
-        return ""
-    endif
-    let line = getline('.')                         " current line
-
-    let substr = strpart(line, -1, col('.')+1)      " from the start of the current
-    " line to one character right
-    " of the cursor
-    let substr = matchstr(substr, '[^ \t]*$')       " word till cursor
-    if (strlen(substr)==0)                          " nothing to match on empty string
-        return "	"
-    endif
-    let has_period = match(substr, '\.') != -1      " position of period, if any
-    if (!has_period)
-        return ""
-    else
-        return ""
-    endif
-endfunction
+" function! Smart_TabComplete()
+"     if pumvisible()
+"         return ""
+"     endif
+"     let line = getline('.')                         " current line
+" 
+" 
+"     let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+"     " line to one character right
+"     " of the cursor
+"     let spaces = strpart(line, -1, col('.'))
+" 
+"     let substr = matchstr(substr, '[^ \t]*$')       " word till cursor
+"     let spaces = matchstr(spaces, '[^ \t]*$')
+"     if (strlen(substr)==0)                          " nothing to match on empty string
+"         return "	"
+"     endif
+"     if (strlen(spaces)==0)                          " nothing to match on empty string
+"         return "	"
+"     endif
+"     let has_period = match(substr, '\.') != -1      " position of period, if any
+"     if (!has_period)
+"         return ""
+"     else
+"         return ""
+"     endif
+" endfunction
 
 " Shift-tab moves backwards in popup menus
 function! Smart_TabNavigation()
