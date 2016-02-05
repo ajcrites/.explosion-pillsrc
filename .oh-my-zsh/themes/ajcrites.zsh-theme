@@ -4,12 +4,18 @@ set_current_branch () {
 }
 
 create_prompt () {
+    # Change color of $ if last command failed
+    if [ $? -eq 0 ]; then
+        color=green
+    else
+        color=red
+    fi
     git=$(git_prompt_info)
     if [ -n "$git" ]; then
         git="$git "
     fi
     # Randomize @ in prompt color
-    PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}CHANGE %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[red]%}%(!.#.\$) %{$reset_color%}"
+    PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}CHANGE %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[$color]%}%(!.#.\$) %{$reset_color%}"
     if [ -n "$VIRTUAL_ENV" ]; then
         PROMPT="(pyvenv: $(basename $VIRTUAL_ENV)) $PROMPT"
     fi
