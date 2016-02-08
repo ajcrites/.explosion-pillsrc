@@ -49,6 +49,8 @@ source $HOME/.bash_functions
 set +o HIST_VERIFY
 export EDITOR=vim
 
+# My own scripts
+export PATH="$HOME/bin:$PATH"
 # global node modules -- give these priority on the path
 export PATH="$HOME/.npm/bin:$PATH"
 
