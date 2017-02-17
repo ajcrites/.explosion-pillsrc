@@ -3,8 +3,12 @@
 --color
 --type-set=spec=.spec
 --pager= LESS='FSRX' less
+--ignore-file=is:yarn.lock
+--ignore-file=is:yarn-error.log
 --ignore-dir=node_modules
 --ignore-dir=.bower-cache
 --ignore-dir=bower_components
 --ignore-dir=.tmp
 --ignore-dir=client/dist
+--ignore-dir=dist
+--ignore-dir=coverage

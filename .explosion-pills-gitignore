@@ -2,4 +2,11 @@
 .DS_Store
 node_modules
 npm-debug.log
+yarn-error.log
 bower_components
+*.tfstate
+*.tfstate.backup
+*.tfplan
+.terraform
+*.tfvars
+*.pyc

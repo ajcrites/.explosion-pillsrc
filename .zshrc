@@ -40,7 +40,7 @@ ZSH_THEME="ajcrites"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow node npm supervisor mongo django vi-mode z colored-man heroku gem rails rake rvm rbenv vagrant virtualenv brew tmux bundler go history-substring-search knife pip mvn postgres python scala redis-cli web-search mercurial hub karma gulp docker docker-compose)
+plugins=(git git-flow node npm supervisor mongo django vi-mode z colored-man heroku gem rails rake rvm rbenv vagrant virtualenv brew tmux bundler go history-substring-search knife pip mvn postgres python scala redis-cli web-search mercurial hub karma gulp docker docker-compose aws)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_aliases
@@ -53,6 +53,8 @@ export EDITOR=vim
 export PATH="$HOME/bin:$PATH"
 # global node modules -- give these priority on the path
 export PATH="$HOME/.npm/bin:$PATH"
+# yarn
+export PATH="$HOME/.yarn/bin:$PATH"
 
 ### Added by the Heroku Toolbelt
 export PATH="$PATH:/usr/local/heroku/bin"
@@ -69,6 +71,16 @@ bindkey '\e[A' history-substring-search-up
 bindkey '\e[B' history-substring-search-down
 
 [[ -s "$HOME/.nvm/nvm.sh" ]] && . "$HOME/.nvm/nvm.sh" # This loads nvm
-nvm use 5
+nvm use 7
 
 eval "$(fasd --init auto)"
+
+export GOPATH=$HOME/projects/personal/gopath
+alias vim=nvim
+
+export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+export OPENSSL_INCLUDE_DIR=$(brew --prefix openssl)/include
+export OPENSSL_LIB_DIR=$(brew --prefix openssl)/lib
+export DEP_OPENSSL_INCLUDE=$(brew --prefix openssl)/include

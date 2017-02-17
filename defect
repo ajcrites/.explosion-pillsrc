@@ -6,4 +6,3 @@ for f in $(find . -type f | egrep -v \.git\|README\|infect\|defect); do
 done
 cp ~/.gitignore .explosion-pills-gitignore
 cp ~/.gitconfig .explosion-pills-gitconfig
-[ -f .bashrc ] && sed -i 's/\(@\\\[\\e\[01;32m\\\]\)[^\s]\+/\1<place> /' .bashrc
