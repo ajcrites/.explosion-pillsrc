@@ -1,5 +1,6 @@
 " @File              : .vimrc for ajcrites
 set t_Co=256
+
 call pathogen#infect()
 
 set nocompatible     " Not like Vi
@@ -35,6 +36,9 @@ filetype plugin on   " idk what this does, but it seems important
 syntax on            " Enable syntax highlighting
 set omnifunc=syntaxcomplete#Complete
 
+function s:EditFromJump( )
+endfunction
+
 autocmd FileType spec set filetype=xml
 autocmd BufEnter *.less set filetype=css
 autocmd BufEnter *.go set filetype=go
@@ -50,13 +54,18 @@ autocmd BufEnter Jenkinsfile set filetype=groovy
 
 autocmd BufEnter * set shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufEnter package.json set shiftwidth=2 tabstop=2 softtabstop=2
+autocmd BufEnter project.json set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter swagger.yaml set shiftwidth=2 tabstop=2 softtabstop=2
+autocmd BufEnter *.ts set softtabstop=2 tabstop=2 shiftwidth=2
 
 " project-specific indentation
 autocmd BufEnter ~/projects/mobq/kinvey/* set softtabstop=2 tabstop=2 shiftwidth=2
 autocmd BufEnter ~/projects/mobq/aliro-platform/* set softtabstop=2 tabstop=2 shiftwidth=2
 autocmd BufEnter ~/projects/mobq/knight/* set softtabstop=2 tabstop=2 shiftwidth=2
 autocmd BufEnter ~/projects/mobq/insulet/* set softtabstop=2 tabstop=2 shiftwidth=2
+autocmd BufEnter ~/projects/mobq/tcp/* set softtabstop=2 tabstop=2 shiftwidth=2
+
+" autocmd BufWritePre *.js Neoformat
 
 " Remember last line after opening file (from /etc/vim/vimrc
 if has("autocmd")
@@ -116,7 +125,6 @@ autocmd FileType javascript nmap st :TernDoc<CR>
 autocmd FileType java       call SlashComment()
 
 colorscheme andy
-let g:airline_theme="andy"
 
 highlight Badspace ctermfg=red ctermbg=red
 au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link customBadWhitespace Error
@@ -279,6 +287,22 @@ endfunction
 
 "inoremap <s-tab> <c-r>=Smart_TabNavigation()<CR>
 
+" let g:syntastic_javascript_checkers = ['tern_lint']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_html_checkers = []
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+let g:syntastic_rust_checkers = ['rustc']
+let g:statline_syntastic = 0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " neovim plugins
 if &compatible
     set nocompatible
@@ -289,7 +313,7 @@ call dein#begin(expand('~/.config/nvim/dein'))
 call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 call dein#add('Shougo/deoplete.nvim')
-call dein#add('mhartington/deoplete-typescript')
+" call dein#add('mhartington/deoplete-typescript')
 call dein#add('carlitux/deoplete-ternjs')
 call dein#add('tweekmonster/nvim-checkhealth')
 call dein#add('leafgarland/typescript-vim')
@@ -300,21 +324,32 @@ call dein#add('scrooloose/syntastic')
 call dein#add('hashivim/vim-terraform')
 call dein#add('rust-lang/rust.vim')
 call dein#add('ElmCast/elm-vim')
+call dein#add('chaoren/vim-wordmotion')
+call dein#add('sbdchd/neoformat')
+call dein#add('vim-scripts/SyntaxComplete')
+call dein#add('mileszs/ack.vim')
+call dein#add('ajcrites/autoswap-tmux')
+call dein#add('kien/ctrlp.vim')
+call dein#add('fatih/vim-go')
+call dein#add('junegunn/goyo.vim')
+call dein#add('sjl/gundo.vim')
+call dein#add('neovimhaskell/haskell-vim')
+call dein#add('tpope/vim-markdown')
+call dein#add('tpope/vim-abolish')
+call dein#add('vim-airline/vim-airline')
+call dein#add('easymotion/vim-easymotion')
+call dein#add('tpope/vim-endwise')
+call dein#add('tpope/vim-fugitive')
+call dein#add('othree/html5.vim')
+call dein#add('elzr/vim-json')
+call dein#add('moll/vim-node')
+call dein#add('sickill/vim-pasta')
+call dein#add('tpope/vim-repeat')
+call dein#add('tpope/vim-surround')
+call dein#add('mattn/webapi-vim')
+call dein#add('ajcrites/xmledit')
 
 call dein#end()
-
-" let g:syntastic_javascript_checkers = ['tern_lint']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_html_checkers = []
-let g:syntastic_typescript_checkers = ['tslint']
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 " let g:deoplete#disable_auto_complete = 1
 " let g:deoplete#enable_at_startup = 1
@@ -335,5 +370,6 @@ function! s:check_back_space() abort "{{{
 endfunction"}}}
 
 autocmd CompleteDone * pclose!
+let g:airline_theme="andy"
 
 filetype plugin indent on

@@ -12,3 +12,5 @@
 --ignore-dir=client/dist
 --ignore-dir=dist
 --ignore-dir=coverage
+--ignore-dir=platforms
+--ignore-dir=plugins

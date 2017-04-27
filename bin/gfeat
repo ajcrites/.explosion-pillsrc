@@ -7,7 +7,7 @@ if [ -z $1 ]; then
 fi
 branch_type=${2:-feature}
 current_branch=$(git symbolic-ref -q --short HEAD)
-new_branch=$branch_type/$USER/$(date +%y%m%d)-$1
+new_branch=$branch_type/$USER/$1
 
 git checkout develop
 git pull
