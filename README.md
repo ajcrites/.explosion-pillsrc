@@ -17,7 +17,3 @@ git repo):
 
 * .explosion-pills-gitignore -> .gitignore (global .gitignore)
 * .explosion-pills-gitconfig -> .gitconfig (global .gitconfig)
-
-I have copies of all vim plugins I use. This may not be the
-best idea, but it keeps them locked down and makes their
-addition atomic. I'm sticking with Pathogen.
