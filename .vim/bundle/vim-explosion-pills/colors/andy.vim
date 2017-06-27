@@ -28,7 +28,7 @@ hi LineNr		guifg=darkgrey
 hi title		guifg=darkgrey
 hi StatusLineNC	gui=NONE guifg=lightblue guibg=darkblue
 hi StatusLine	gui=bold	guifg=cyan	guibg=blue
-hi label		guifg=gold2
+" hi label		guifg=gold2
 hi operator		guifg=orange
 hi clear Visual
 hi Visual		term=reverse cterm=reverse gui=reverse

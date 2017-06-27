@@ -1,86 +1,40 @@
-# Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
 ZSH_THEME="ajcrites"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow node npm supervisor mongo django vi-mode z colored-man heroku gem rails rake rvm rbenv vagrant virtualenv brew tmux bundler go history-substring-search knife pip mvn postgres python scala redis-cli web-search mercurial hub karma gulp docker docker-compose aws)
+plugins=(git vi-mode z colored-man history-substring-search hub docker docker-compose aws)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_aliases
 source $HOME/.bash_functions
 
 set +o HIST_VERIFY
+set +o HIST_FIND_NO_DUPS
+set +o HIST_IGNORE_ALL_DUPS
 export EDITOR=vim
 
 # My own scripts
 export PATH="$HOME/bin:$PATH"
-# global node modules -- give these priority on the path
 export PATH="$HOME/.npm/bin:$PATH"
-# yarn
-export PATH="$HOME/.yarn/bin:$PATH"
-
-### Added by the Heroku Toolbelt
-export PATH="$PATH:/usr/local/heroku/bin"
 
 # Smartcase tab completion
 zstyle ':completion:*' matcher-list 'm:{a-z0-9}={A-Z0-9}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
 bindkey -M viins 'ij' vi-cmd-mode
 bindkey '\e[A' history-substring-search-up
 bindkey '\e[B' history-substring-search-down
-
-[[ -s "$HOME/.nvm/nvm.sh" ]] && . "$HOME/.nvm/nvm.sh" # This loads nvm
-nvm use 7
-
-eval "$(fasd --init auto)"
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 export GOPATH=$HOME/projects/personal/gopath
 alias vim=nvim
 
-export PATH="$HOME/.yarn/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
+export N_PREFIX=$HOME/.n
 
-export OPENSSL_INCLUDE_DIR=$(brew --prefix openssl)/include
-export OPENSSL_LIB_DIR=$(brew --prefix openssl)/lib
-export DEP_OPENSSL_INCLUDE=$(brew --prefix openssl)/include
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.n/bin:$PATH"
+
+export ANDROID_HOME=/Users/acrites/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+export JAVA_HOME="$(/usr/libexec/java_home)"

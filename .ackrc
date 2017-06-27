@@ -14,3 +14,4 @@
 --ignore-dir=coverage
 --ignore-dir=platforms
 --ignore-dir=plugins
+--ignore-dir=www/build

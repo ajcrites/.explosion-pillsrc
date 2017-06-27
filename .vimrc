@@ -1,7 +1,7 @@
 " @File              : .vimrc for ajcrites
 set t_Co=256
 
-call pathogen#infect()
+" call pathogen#infect()
 
 set nocompatible     " Not like Vi
 set autoread         " detect when file is changed
@@ -124,10 +124,7 @@ autocmd FileType javascript call SlashComment()
 autocmd FileType javascript nmap st :TernDoc<CR>
 autocmd FileType java       call SlashComment()
 
-colorscheme andy
-
-highlight Badspace ctermfg=red ctermbg=red
-au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link customBadWhitespace Error
+   
 
 "Quirky mappings
 "
@@ -303,6 +300,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" let g:SuperTabDefaultCompletionType = 'context'
+" let g:SuperTabContextDefaultCompletionType = '<c-x><c-o>'
+
 " neovim plugins
 if &compatible
     set nocompatible
@@ -313,14 +313,16 @@ call dein#begin(expand('~/.config/nvim/dein'))
 call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 call dein#add('Shougo/deoplete.nvim')
-" call dein#add('mhartington/deoplete-typescript')
-call dein#add('carlitux/deoplete-ternjs')
+call dein#add('mhartington/deoplete-typescript')
+" call dein#add('mhartington/nvim-typescript')
+" call dein#add('carlitux/deoplete-ternjs')
 call dein#add('tweekmonster/nvim-checkhealth')
 call dein#add('leafgarland/typescript-vim')
 call dein#add('Quramy/vim-js-pretty-template')
 call dein#add('jason0x43/vim-js-indent')
 call dein#add('Quramy/tsuquyomi')
 call dein#add('scrooloose/syntastic')
+" call dein#add('ervandew/supertab')
 call dein#add('hashivim/vim-terraform')
 call dein#add('rust-lang/rust.vim')
 call dein#add('ElmCast/elm-vim')
@@ -340,7 +342,7 @@ call dein#add('vim-airline/vim-airline')
 call dein#add('easymotion/vim-easymotion')
 call dein#add('tpope/vim-endwise')
 call dein#add('tpope/vim-fugitive')
-call dein#add('othree/html5.vim')
+" call dein#add('othree/html5.vim')
 call dein#add('elzr/vim-json')
 call dein#add('moll/vim-node')
 call dein#add('sickill/vim-pasta')
@@ -354,15 +356,19 @@ call dein#end()
 " let g:deoplete#disable_auto_complete = 1
 " let g:deoplete#enable_at_startup = 1
 
+" omni completion with <Tab>
 inoremap <silent><expr> <TAB>
     \ pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<TAB>" :
-    \ deoplete#mappings#manual_complete()
+    \ "\<C-x>\<C-o>"
 
+" keyword completion with S-tab
+" ;<TAB> multikey
+imap ;<TAB> <S-tAB>
 inoremap <silent><expr> <S-TAB>
     \ pumvisible() ? "\<C-p>" :
     \ <SID>check_back_space() ? "\<TAB>" :
-    \ deoplete#mappings#manual_complete()
+    \ "\<C-p>"
 
 function! s:check_back_space() abort "{{{
     let col = col('.') - 1
@@ -370,6 +376,11 @@ function! s:check_back_space() abort "{{{
 endfunction"}}}
 
 autocmd CompleteDone * pclose!
-let g:airline_theme="andy"
+" let g:airline_theme="andy"
 
 filetype plugin indent on
+
+colorscheme andy
+
+highlight Badspace ctermfg=red ctermbg=red
+au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link customBadWhitespace Error
