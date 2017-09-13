@@ -33,10 +33,10 @@
 	p = !git --no-pager
 	who = shortlog -sn --no-merges
 	update = remote update -p
-	incoming = !git --no-pager log ..@{u}
-	in = !git --no-pager log ..@{u}
-	outgoing = !git --no-pager log @{u}..
-	out = !git --no-pager log @{u}..
+	incoming = "!f() { git --no-pager log ..$1; }; f"
+	in = "!f() { git --no-pager log ..$1; }; f"
+	outgoing = "!f() { git --no-pager log $1..; }; f"
+	out = "!f() { git --no-pager log $1..; }; f"
 	files = !git --no-pager log --no-merges --name-only --no-commit-id --max-count=1 --pretty="format:"
 
 [rebase]

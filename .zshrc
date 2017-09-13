@@ -14,6 +14,7 @@ export EDITOR=vim
 # My own scripts
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.npm/bin:$PATH"
+export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # Smartcase tab completion
 zstyle ':completion:*' matcher-list 'm:{a-z0-9}={A-Z0-9}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'

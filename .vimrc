@@ -36,6 +36,9 @@ filetype plugin on   " idk what this does, but it seems important
 syntax on            " Enable syntax highlighting
 set omnifunc=syntaxcomplete#Complete
 
+" let g:python2_host_prog = '/usr/local/bin/python'
+" let g:python3_host_prog = '/usr/local/bin/python3'
+
 function s:EditFromJump( )
 endfunction
 
@@ -64,6 +67,7 @@ autocmd BufEnter ~/projects/mobq/aliro-platform/* set softtabstop=2 tabstop=2 sh
 autocmd BufEnter ~/projects/mobq/knight/* set softtabstop=2 tabstop=2 shiftwidth=2
 autocmd BufEnter ~/projects/mobq/insulet/* set softtabstop=2 tabstop=2 shiftwidth=2
 autocmd BufEnter ~/projects/mobq/tcp/* set softtabstop=2 tabstop=2 shiftwidth=2
+autocmd BufEnter ~/projects/personal/hide-gnv-seek/* set softtabstop=2 tabstop=2 shiftwidth=2
 
 " autocmd BufWritePre *.js Neoformat
 

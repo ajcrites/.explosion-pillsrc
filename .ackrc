@@ -2,7 +2,7 @@
 --smart-case
 --color
 --type-set=spec=.spec
---pager= LESS='FSRX' less
+# --pager= LESS='FSRX' less
 --ignore-file=is:yarn.lock
 --ignore-file=is:yarn-error.log
 --ignore-dir=node_modules

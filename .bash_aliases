@@ -92,3 +92,5 @@ alias vimo='vim ${${(z)$(fc -l -1)}[3]}'
 
 #node
 alias nod='\node'
+
+alias vimp='vim package.json'
