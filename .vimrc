@@ -128,8 +128,6 @@ autocmd FileType javascript call SlashComment()
 autocmd FileType javascript nmap st :TernDoc<CR>
 autocmd FileType java       call SlashComment()
 
-   
-
 "Quirky mappings
 "
 " Opposite of J -- split lines
@@ -183,6 +181,9 @@ map Z o<Esc>
 
 " quick unhighlight after search
 nnoremap <C-l> :nohl<CR>
+
+map q: :q
+map :Sp :sp
 
 " typos
 abbr springf sprintf
@@ -247,7 +248,6 @@ inoremap =" =""<Left>
 inoremap =' =''<Left>
 
 set colorcolumn=80
-autocmd BufEnter *.md set colorcolumn=60
 
 " Gundo
 nnoremap <F5> :GundoToggle<CR>

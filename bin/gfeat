@@ -9,9 +9,9 @@ branch_type=${2:-feature}
 current_branch=$(git symbolic-ref -q --short HEAD)
 new_branch=$branch_type/$USER/$1
 
-git checkout develop
+git checkout ${3:-develop}
 git pull
 # delete the previous feature if it's been merged
 git branch -d $current_branch || true
 git checkout -b $new_branch
-git branch --set-upstream-to=develop
+git branch --set-upstream-to=${3:-develop}

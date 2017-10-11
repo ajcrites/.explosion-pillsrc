@@ -7,11 +7,11 @@ if [ -z $1 ]; then
 else
     branch=$1
 fi
-user_or_org=${2:-Mobiquity}
-source_or_org=${3:-$user_or_org}
+user_or_org=${3:-Mobiquity}
+source_or_org=${4:-$user_or_org}
 
-git checkout develop
+git checkout ${2:-develop}
 git pull
-git rebase develop $branch
+git rebase ${2:-develop} $branch
 git push origin $branch
-hub pull-request -b ${user_or_org}:develop -h ${source_or_org}:$branch
+hub pull-request -b ${user_or_org}:${2-develop} -h ${source_or_org}:$branch
