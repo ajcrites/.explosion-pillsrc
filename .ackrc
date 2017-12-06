@@ -9,6 +9,7 @@
 --ignore-dir=.bower-cache
 --ignore-dir=bower_components
 --ignore-dir=.tmp
+--ignore-dir=.sourcemaps
 --ignore-dir=client/dist
 --ignore-dir=dist
 --ignore-dir=coverage

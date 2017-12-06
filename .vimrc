@@ -290,10 +290,10 @@ endfunction
 
 " let g:syntastic_javascript_checkers = ['tern_lint']
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_rust_checkers = ['cargo']
 let g:syntastic_html_checkers = []
-let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi']
-let g:syntastic_rust_checkers = ['rustc']
+let g:tsuquyomi_disable_quickfix = 1
 let g:statline_syntastic = 0
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -304,6 +304,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+let g:prettier#config#single_quote = 'true'
+let g:prettier#config#trailing_comma = 'all'
+let g:prettier#config#bracket_spacing = 'true'
+
 " let g:SuperTabDefaultCompletionType = 'context'
 " let g:SuperTabContextDefaultCompletionType = '<c-x><c-o>'
 
@@ -312,50 +316,57 @@ if &compatible
     set nocompatible
 endif
 set runtimepath^=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
-call dein#begin(expand('~/.config/nvim/dein'))
+if dein#load_state(expand('~/.config/nvim/dein'))
+    call dein#begin(expand('~/.config/nvim/dein'))
 
-call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-call dein#add('Shougo/deoplete.nvim')
-call dein#add('mhartington/deoplete-typescript')
-" call dein#add('mhartington/nvim-typescript')
-" call dein#add('carlitux/deoplete-ternjs')
-call dein#add('tweekmonster/nvim-checkhealth')
-call dein#add('leafgarland/typescript-vim')
-call dein#add('Quramy/vim-js-pretty-template')
-call dein#add('jason0x43/vim-js-indent')
-call dein#add('Quramy/tsuquyomi')
-call dein#add('scrooloose/syntastic')
-" call dein#add('ervandew/supertab')
-call dein#add('hashivim/vim-terraform')
-call dein#add('rust-lang/rust.vim')
-call dein#add('ElmCast/elm-vim')
-call dein#add('chaoren/vim-wordmotion')
-call dein#add('sbdchd/neoformat')
-call dein#add('vim-scripts/SyntaxComplete')
-call dein#add('mileszs/ack.vim')
-call dein#add('ajcrites/autoswap-tmux')
-call dein#add('kien/ctrlp.vim')
-call dein#add('fatih/vim-go')
-call dein#add('junegunn/goyo.vim')
-call dein#add('sjl/gundo.vim')
-call dein#add('neovimhaskell/haskell-vim')
-call dein#add('tpope/vim-markdown')
-call dein#add('tpope/vim-abolish')
-call dein#add('vim-airline/vim-airline')
-call dein#add('easymotion/vim-easymotion')
-call dein#add('tpope/vim-endwise')
-call dein#add('tpope/vim-fugitive')
-" call dein#add('othree/html5.vim')
-call dein#add('elzr/vim-json')
-call dein#add('moll/vim-node')
-call dein#add('sickill/vim-pasta')
-call dein#add('tpope/vim-repeat')
-call dein#add('tpope/vim-surround')
-call dein#add('mattn/webapi-vim')
-call dein#add('ajcrites/xmledit')
+    call dein#add('Shougo/dein.vim')
+    call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+    call dein#add('Shougo/deoplete.nvim')
+    " call dein#add('mhartington/deoplete-typescript')
+    " call dein#add('mhartington/nvim-typescript')
+    " call dein#add('carlitux/deoplete-ternjs')
+    call dein#add('tweekmonster/nvim-checkhealth')
+    call dein#add('Quramy/vim-js-pretty-template')
+    call dein#add('jason0x43/vim-js-indent')
+    call dein#add('Quramy/tsuquyomi')
+    " call dein#add('leafgarland/typescript-vim')
+    call dein#add('scrooloose/syntastic')
+    " call dein#add('ervandew/supertab')
+    call dein#add('hashivim/vim-terraform')
+    call dein#add('rust-lang/rust.vim')
+    call dein#add('ElmCast/elm-vim')
+    call dein#add('chaoren/vim-wordmotion')
+    call dein#add('sbdchd/neoformat')
+    call dein#add('vim-scripts/SyntaxComplete')
+    call dein#add('mileszs/ack.vim')
+    call dein#add('ajcrites/autoswap-tmux')
+    call dein#add('kien/ctrlp.vim')
+    call dein#add('fatih/vim-go')
+    call dein#add('junegunn/goyo.vim')
+    call dein#add('sjl/gundo.vim')
+    call dein#add('neovimhaskell/haskell-vim')
+    call dein#add('tpope/vim-markdown')
+    call dein#add('tpope/vim-abolish')
+    call dein#add('vim-airline/vim-airline')
+    call dein#add('easymotion/vim-easymotion')
+    call dein#add('tpope/vim-endwise')
+    call dein#add('tpope/vim-fugitive')
+    " call dein#add('othree/html5.vim')
+    " call dein#add('elzr/vim-json')
+    call dein#add('moll/vim-node')
+    call dein#add('sickill/vim-pasta')
+    call dein#add('tpope/vim-repeat')
+    call dein#add('tpope/vim-surround')
+    call dein#add('mattn/webapi-vim')
+    call dein#add('ajcrites/xmledit')
+    call dein#add('prettier/vim-prettier')
 
-call dein#end()
+    call dein#end()
+    call dein#save_state()
+endif
+
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.json,*.graphql,*.md PrettierAsync
 
 " let g:deoplete#disable_auto_complete = 1
 " let g:deoplete#enable_at_startup = 1

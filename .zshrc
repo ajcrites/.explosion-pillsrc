@@ -36,6 +36,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.n/bin:$PATH"
 
 export ANDROID_HOME=/Users/acrites/Library/Android/sdk
+export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 export JAVA_HOME="$(/usr/libexec/java_home)"
