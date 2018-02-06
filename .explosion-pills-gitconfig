@@ -38,6 +38,8 @@
 	outgoing = "!f() { git --no-pager log $1..; }; f"
 	out = "!f() { git --no-pager log $1..; }; f"
 	files = !git --no-pager log --no-merges --name-only --no-commit-id --max-count=1 --pretty="format:"
+	ticket = log --no-merges --grep
+	poc = !git push origin $(git rev-parse --abbrev-ref HEAD)
 
 [rebase]
 	autosquash = true

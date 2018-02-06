@@ -9,7 +9,7 @@ source $HOME/.bash_functions
 set +o HIST_VERIFY
 set +o HIST_FIND_NO_DUPS
 set +o HIST_IGNORE_ALL_DUPS
-export EDITOR=vim
+export EDITOR=nvim
 
 # My own scripts
 export PATH="$HOME/bin:$PATH"
@@ -38,5 +38,8 @@ export PATH="$HOME/.n/bin:$PATH"
 export ANDROID_HOME=/Users/acrites/Library/Android/sdk
 export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$GOPATH/bin
 
 export JAVA_HOME="$(/usr/libexec/java_home)"
+
+compdef gilt=git

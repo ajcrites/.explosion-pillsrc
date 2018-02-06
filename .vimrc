@@ -54,6 +54,7 @@ autocmd BufEnter *.yml set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter *.go set noexpandtab
 autocmd BufEnter *.hbs set filetype=html
 autocmd BufEnter Jenkinsfile set filetype=groovy
+autocmd BufEnter .babelrc set filetype=json
 
 autocmd BufEnter * set shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufEnter package.json set shiftwidth=2 tabstop=2 softtabstop=2
@@ -68,6 +69,7 @@ autocmd BufEnter ~/projects/mobq/knight/* set softtabstop=2 tabstop=2 shiftwidth
 autocmd BufEnter ~/projects/mobq/insulet/* set softtabstop=2 tabstop=2 shiftwidth=2
 autocmd BufEnter ~/projects/mobq/tcp/* set softtabstop=2 tabstop=2 shiftwidth=2
 autocmd BufEnter ~/projects/personal/hide-gnv-seek/* set softtabstop=2 tabstop=2 shiftwidth=2
+autocmd BufEnter ~/projects/personal/times-tables/* set softtabstop=2 tabstop=2 shiftwidth=2
 
 " autocmd BufWritePre *.js Neoformat
 
@@ -155,6 +157,10 @@ map <C-w>j <C-w><Down>
 map <C-w>k <C-w><Up>
 map <C-w>l <C-w><Right>
 
+" shortcuts
+inoremap clg console.log()<Left>
+inoremap cl; console.log();<Left><Left>
+
 " delete a function or a loop
 map fd <Esc><Home>/{<Return><C-l>d%dd
 
@@ -184,6 +190,7 @@ nnoremap <C-l> :nohl<CR>
 
 map q: :q
 map :Sp :sp
+map :W :w
 
 " typos
 abbr springf sprintf
@@ -304,10 +311,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-let g:prettier#config#single_quote = 'true'
-let g:prettier#config#trailing_comma = 'all'
-let g:prettier#config#bracket_spacing = 'true'
-
 " let g:SuperTabDefaultCompletionType = 'context'
 " let g:SuperTabContextDefaultCompletionType = '<c-x><c-o>'
 
@@ -328,9 +331,9 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('tweekmonster/nvim-checkhealth')
     call dein#add('Quramy/vim-js-pretty-template')
     call dein#add('jason0x43/vim-js-indent')
+    call dein#add('scrooloose/syntastic')
     call dein#add('Quramy/tsuquyomi')
     " call dein#add('leafgarland/typescript-vim')
-    call dein#add('scrooloose/syntastic')
     " call dein#add('ervandew/supertab')
     call dein#add('hashivim/vim-terraform')
     call dein#add('rust-lang/rust.vim')
@@ -360,13 +363,22 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('mattn/webapi-vim')
     call dein#add('ajcrites/xmledit')
     call dein#add('prettier/vim-prettier')
+    " call dein#add('terryma/vim-multiple-cursors')
+    call dein#add('suan/vim-instant-markdown')
 
     call dein#end()
     call dein#save_state()
 endif
 
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.json,*.graphql,*.md PrettierAsync
+
+let g:prettier#config#parser = 'typescript'
+let g:prettier#config#single_quote = 'true'
+let g:prettier#config#trailing_comma = 'all'
+let g:prettier#config#bracket_spacing = 'true'
+
+" autocmd BufWritePre ~/projects/mobq/tcp/*.ts PrettierAsync
+autocmd BufWritePre ~/projects/personal/times-tables/*.tsx PrettierAsync
 
 " let g:deoplete#disable_auto_complete = 1
 " let g:deoplete#enable_at_startup = 1
