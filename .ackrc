@@ -16,3 +16,5 @@
 --ignore-dir=platforms
 --ignore-dir=plugins
 --ignore-dir=www/build
+--ignore-dir=ios
+--ignore-dir=android

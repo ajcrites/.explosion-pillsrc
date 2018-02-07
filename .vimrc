@@ -295,24 +295,16 @@ endfunction
 
 "inoremap <s-tab> <c-r>=Smart_TabNavigation()<CR>
 
-" let g:syntastic_javascript_checkers = ['tern_lint']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_rust_checkers = ['cargo']
-let g:syntastic_html_checkers = []
-let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:tsuquyomi_disable_quickfix = 1
-let g:statline_syntastic = 0
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 " let g:SuperTabDefaultCompletionType = 'context'
 " let g:SuperTabContextDefaultCompletionType = '<c-x><c-o>'
+
+let g:ale_linters = {
+\ 'typescript': ['tslint', 'tsserver']
+\}
 
 " neovim plugins
 if &compatible
@@ -331,7 +323,7 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('tweekmonster/nvim-checkhealth')
     call dein#add('Quramy/vim-js-pretty-template')
     call dein#add('jason0x43/vim-js-indent')
-    call dein#add('scrooloose/syntastic')
+    call dein#add('w0rp/ale')
     call dein#add('Quramy/tsuquyomi')
     " call dein#add('leafgarland/typescript-vim')
     " call dein#add('ervandew/supertab')
@@ -411,3 +403,10 @@ colorscheme andy
 
 highlight Badspace ctermfg=red ctermbg=red
 au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link customBadWhitespace Error
+
+let g:ale_open_list = 1
+let g:ale_keep_list_window_open = 0
+
+nmap <silent> <C-k> <Plug>(ale_previous)
+nmap <silent> <C-j> <Plug>(ale_next)
+nmap <silent> <C-d> <Plug>(ale_toggle)
