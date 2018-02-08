@@ -58,6 +58,8 @@ autocmd BufEnter .babelrc set filetype=json
 
 autocmd BufEnter * set shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufEnter package.json set shiftwidth=2 tabstop=2 softtabstop=2
+autocmd BufEnter tsconfig.json set shiftwidth=2 tabstop=2 softtabstop=2
+autocmd BufEnter tslint.json set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter project.json set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter swagger.yaml set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter *.ts set softtabstop=2 tabstop=2 shiftwidth=2
@@ -303,7 +305,15 @@ set statusline+=%*
 " let g:SuperTabContextDefaultCompletionType = '<c-x><c-o>'
 
 let g:ale_linters = {
-\ 'typescript': ['tslint', 'tsserver']
+\ 'typescript': ['tslint', 'tsserver'],
+\ 'javascript': []
+\}
+
+let g:codi#interpreters = {
+\ 'typescript': {
+    \ 'bin': ['ts-node'],
+    \ 'prompt': '^\(>\|\.\.\.\+\) ',
+    \ },
 \}
 
 " neovim plugins
@@ -357,6 +367,7 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('prettier/vim-prettier')
     " call dein#add('terryma/vim-multiple-cursors')
     call dein#add('suan/vim-instant-markdown')
+    call dein#add('metakirby5/codi.vim')
 
     call dein#end()
     call dein#save_state()
@@ -410,3 +421,26 @@ let g:ale_keep_list_window_open = 0
 nmap <silent> <C-k> <Plug>(ale_previous)
 nmap <silent> <C-j> <Plug>(ale_next)
 nmap <silent> <C-d> <Plug>(ale_toggle)
+
+" Quick Toggle for Codi
+" Codi doesn't really play nice with ALE, and ALE will close Codi if it's open
+" and there are no errors. Instead, use a hotkey to make them play along
+" better. The sleep 500m prevents an error from popping up with Codi for some
+" reason...
+nnoremap <silent> <C-c> :call CodiToggle()<cr>
+
+let s:codiopen = 0
+function! CodiToggle()
+    if s:codiopen
+        let s:codiopen = 0
+        let g:codi#autoclose = 0
+        sleep 500m
+        Codi!
+        let g:ale_keep_list_window_open = 0
+        ALELint
+    else
+        let s:codiopen = 1
+        let g:ale_keep_list_window_open = 1
+        Codi
+    endif
+endfunction
