@@ -217,9 +217,12 @@ imap 4_ $_
 imap if( if<Space>(
 imap $> %>
 
+set iskeyword+=:
+set iskeyword+='
+set iskeyword+=,
+
 "make `-` a word character so I can autocomplete words containing dashes
 function! DashToggle()
-   echo &iskeyword
    if matchstr(&iskeyword, '-$') == '-'
       set iskeyword-=-
    else
@@ -237,7 +240,6 @@ nmap sh <C-w>h
 nmap sj <C-w>j
 nmap sk <C-w>k
 nmap sl <C-w>l
-nmap sg :Gstatus<CR>
 
 " mouse (in tmux)
 if !has('nvim')
@@ -306,8 +308,14 @@ set statusline+=%*
 
 let g:ale_linters = {
 \ 'typescript': ['tslint', 'tsserver'],
+\ 'rust': ['cargo'],
 \ 'javascript': []
 \}
+let g:ale_fixers = {
+\ 'typescript': ['tslint']
+\}
+
+let g:ale_rust_cargo_use_check = 1
 
 let g:codi#interpreters = {
 \ 'typescript': {
@@ -315,6 +323,16 @@ let g:codi#interpreters = {
     \ 'prompt': '^\(>\|\.\.\.\+\) ',
     \ },
 \}
+
+" camelCase motion is more common than search motion.
+" I never use the default bindings of ' and "
+let g:wordmotion_mappings = {
+\ 'w' : 'n',
+\ 'b' : 'N',
+\ }
+nnoremap ' n
+nnoremap " N
+nnoremap <C-b> "
 
 " neovim plugins
 if &compatible
@@ -333,13 +351,13 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('tweekmonster/nvim-checkhealth')
     call dein#add('Quramy/vim-js-pretty-template')
     call dein#add('jason0x43/vim-js-indent')
-    call dein#add('w0rp/ale')
     call dein#add('Quramy/tsuquyomi')
     " call dein#add('leafgarland/typescript-vim')
     " call dein#add('ervandew/supertab')
     call dein#add('hashivim/vim-terraform')
     call dein#add('rust-lang/rust.vim')
     call dein#add('ElmCast/elm-vim')
+    call dein#add('w0rp/ale')
     call dein#add('chaoren/vim-wordmotion')
     call dein#add('sbdchd/neoformat')
     call dein#add('vim-scripts/SyntaxComplete')
@@ -368,6 +386,8 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     " call dein#add('terryma/vim-multiple-cursors')
     call dein#add('suan/vim-instant-markdown')
     call dein#add('metakirby5/codi.vim')
+    call dein#add('AndrewRadev/sideways.vim')
+    call dein#add('romainl/vim-qf')
 
     call dein#end()
     call dein#save_state()
@@ -379,6 +399,14 @@ let g:prettier#config#parser = 'typescript'
 let g:prettier#config#single_quote = 'true'
 let g:prettier#config#trailing_comma = 'all'
 let g:prettier#config#bracket_spacing = 'true'
+
+nnoremap <C-h> :SidewaysJumpLeft<cr>
+nnoremap <C-n> :SidewaysJumpRight<cr>
+
+omap aa <Plug>SidewaysArgumentTextobjA
+xmap aa <Plug>SidewaysArgumentTextobjA
+omap ia <Plug>SidewaysArgumentTextobjI
+xmap ia <Plug>SidewaysArgumentTextobjI
 
 " autocmd BufWritePre ~/projects/mobq/tcp/*.ts PrettierAsync
 autocmd BufWritePre ~/projects/personal/times-tables/*.tsx PrettierAsync
