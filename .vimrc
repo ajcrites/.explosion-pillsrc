@@ -63,6 +63,7 @@ autocmd BufEnter tslint.json set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter project.json set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter swagger.yaml set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter *.ts set softtabstop=2 tabstop=2 shiftwidth=2
+autocmd BufEnter *.tsx set softtabstop=2 tabstop=2 shiftwidth=2
 
 " project-specific indentation
 autocmd BufEnter ~/projects/mobq/kinvey/* set softtabstop=2 tabstop=2 shiftwidth=2
@@ -72,6 +73,8 @@ autocmd BufEnter ~/projects/mobq/insulet/* set softtabstop=2 tabstop=2 shiftwidt
 autocmd BufEnter ~/projects/mobq/tcp/* set softtabstop=2 tabstop=2 shiftwidth=2
 autocmd BufEnter ~/projects/personal/hide-gnv-seek/* set softtabstop=2 tabstop=2 shiftwidth=2
 autocmd BufEnter ~/projects/personal/times-tables/* set softtabstop=2 tabstop=2 shiftwidth=2
+autocmd BufEnter ~/projects/personal/react-lessons/* set softtabstop=2 tabstop=2 shiftwidth=2
+autocmd BufEnter ~/projects/personal/tslint-react/* set softtabstop=4 tabstop=4 shiftwidth=4
 
 " autocmd BufWritePre *.js Neoformat
 
@@ -163,8 +166,10 @@ map <C-w>l <C-w><Right>
 inoremap clg console.log()<Left>
 inoremap cl; console.log();<Left><Left>
 
-" delete a function or a loop
-map fd <Esc><Home>/{<Return><C-l>d%dd
+" move or edit functions / blocks as groups
+map fd <Esc><Home>/{\\|}<Return><C-l>d%dd
+map fj <Esc><Home>/{\\|}<Return><C-l>V%:m<Space>'>+1<CR>=
+map fk <Esc><Home>/{\\|}<Return><C-l>V%:m<Space>'<-2<CR>=
 
 " create matching braces
 inoremap {{ {<Esc>o}<Up><Esc>o
@@ -209,6 +214,7 @@ abbr breka break
 abbr lenght length
 abbr reutrn return
 abbr retrun return
+abbr improt import
 
 " syntax mistypes
 imap <Br <br
@@ -216,10 +222,7 @@ imap codE> code>
 imap 4_ $_
 imap if( if<Space>(
 imap $> %>
-
-set iskeyword+=:
-set iskeyword+='
-set iskeyword+=,
+imap (<Space>= () =
 
 "make `-` a word character so I can autocomplete words containing dashes
 function! DashToggle()
@@ -240,6 +243,7 @@ nmap sh <C-w>h
 nmap sj <C-w>j
 nmap sk <C-w>k
 nmap sl <C-w>l
+nmap sy :PrettierAsync<CR>
 
 " mouse (in tmux)
 if !has('nvim')
@@ -264,7 +268,7 @@ set colorcolumn=80
 nnoremap <F5> :GundoToggle<CR>
 
 " jsx
-let g:jsx_ext_required = 0
+let g:jsx_ext_required = 1
 
 " This rewires n and N to do the highlighing...
 nnoremap <silent> n   n:call HLNext(0.8)<cr>
@@ -300,6 +304,7 @@ endfunction
 "inoremap <s-tab> <c-r>=Smart_TabNavigation()<CR>
 
 let g:tsuquyomi_disable_quickfix = 1
+let g:tsuquyomi_single_quote_import = 1
 set statusline+=%#warningmsg#
 set statusline+=%*
 
@@ -334,6 +339,15 @@ nnoremap ' n
 nnoremap " N
 nnoremap <C-b> "
 
+let g:loaded_matchparen = 1
+let g:qf_loclist_window_bottom = 0
+
+let g:dispatch_compilers = {}
+let g:dispatch_compilers['node_modules/.bin/jest'] = 'jest-cli'
+
+let g:test#javascript#jest#options = '--reporters ~/vim-reporter --silent'
+let g:test#strategy = 'dispatch'
+
 " neovim plugins
 if &compatible
     set nocompatible
@@ -345,19 +359,21 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
     call dein#add('Shougo/deoplete.nvim')
+    " call dein#add('Quramy/tsuquyomi')
+    call dein#local('~/projects/personal', {}, ['tsuquyomi'])
     " call dein#add('mhartington/deoplete-typescript')
     " call dein#add('mhartington/nvim-typescript')
     " call dein#add('carlitux/deoplete-ternjs')
     call dein#add('tweekmonster/nvim-checkhealth')
     call dein#add('Quramy/vim-js-pretty-template')
     call dein#add('jason0x43/vim-js-indent')
-    call dein#add('Quramy/tsuquyomi')
     " call dein#add('leafgarland/typescript-vim')
     " call dein#add('ervandew/supertab')
     call dein#add('hashivim/vim-terraform')
     call dein#add('rust-lang/rust.vim')
     call dein#add('ElmCast/elm-vim')
-    call dein#add('w0rp/ale')
+    " call dein#add('w0rp/ale')
+    call dein#local('~/projects/personal', {}, ['ale'])
     call dein#add('chaoren/vim-wordmotion')
     call dein#add('sbdchd/neoformat')
     call dein#add('vim-scripts/SyntaxComplete')
@@ -383,11 +399,20 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('mattn/webapi-vim')
     call dein#add('ajcrites/xmledit')
     call dein#add('prettier/vim-prettier')
-    " call dein#add('terryma/vim-multiple-cursors')
+    call dein#add('terryma/vim-multiple-cursors')
     call dein#add('suan/vim-instant-markdown')
     call dein#add('metakirby5/codi.vim')
     call dein#add('AndrewRadev/sideways.vim')
     call dein#add('romainl/vim-qf')
+    call dein#add('mxw/vim-jsx')
+    call dein#add('itchyny/vim-parenmatch')
+    call dein#add('junegunn/vader.vim')
+    " call dein#add('janko-m/vim-test')
+    call dein#add('tpope/vim-dispatch')
+    " call dein#add('benmills/vimux')
+    call dein#local('~/projects/personal', {}, ['vim-test'])
+    call dein#local('~/projects/personal', {}, ['vim-jest-cli'])
+    call dein#add('powerman/vim-plugin-AnsiEsc')
 
     call dein#end()
     call dein#save_state()
@@ -410,6 +435,19 @@ xmap ia <Plug>SidewaysArgumentTextobjI
 
 " autocmd BufWritePre ~/projects/mobq/tcp/*.ts PrettierAsync
 autocmd BufWritePre ~/projects/personal/times-tables/*.tsx PrettierAsync
+
+let g:prettier#quickfix_enabled = 0
+
+autocmd BufWritePre,InsertLeave ~/projects/personal/react-lessons/*.tsx let g:prettier#config#parser = 'typesript'
+autocmd BufWritePre,InsertLeave ~/projects/personal/react-lessons/*.tsx let g:prettier#config#single_quote = 'true'
+autocmd BufWritePre,InsertLeave ~/projects/personal/react-lessons/*.tsx let g:prettier#config#trailing_comma = 'all'
+autocmd BufWritePre,InsertLeave ~/projects/personal/react-lessons/*.tsx let g:prettier#config#bracked_spacing = 'true'
+autocmd BufWritePre ~/projects/personal/react-lessons/*.tsx PrettierAsync
+
+let g:multi_cursor_next_key = '<C-g>'
+let g:multi_cursor_prev_key = '<C-f>'
+let g:multi_cursor_skip_key = '<C-x>'
+let g:multi_cursor_quit_key = '@'
 
 " let g:deoplete#disable_auto_complete = 1
 " let g:deoplete#enable_at_startup = 1
@@ -438,17 +476,45 @@ autocmd CompleteDone * pclose!
 
 filetype plugin indent on
 
+" putting this here gets vim-jsx to work for typescript
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.jsx
+
 colorscheme andy
 
 highlight Badspace ctermfg=red ctermbg=red
 au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link customBadWhitespace Error
 
 let g:ale_open_list = 1
+" let g:ale_set_loclist = 0
+" let g:ale_set_quickfix = 1
 let g:ale_keep_list_window_open = 0
+let g:ale_list_window_size = 80
+let g:ale_list_vertical = 1
 
 nmap <silent> <C-k> <Plug>(ale_previous)
 nmap <silent> <C-j> <Plug>(ale_next)
-nmap <silent> <C-d> <Plug>(ale_toggle)
+nmap <C-d> :call AleToggle()<cr>
+
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
+
+let s:aleopen = 1
+function! AleToggle()
+    if s:aleopen
+        ALEDisable
+        sleep 100m
+        let s:aleopen = 0
+        let g:ale_open_list = 0
+        ALEEnable
+    else
+        ALEDisable
+        let s:aleopen = 1
+        let g:ale_open_list = 1
+        ALEEnable
+    endif
+endfunction
 
 " Quick Toggle for Codi
 " Codi doesn't really play nice with ALE, and ALE will close Codi if it's open
@@ -472,3 +538,7 @@ function! CodiToggle()
         Codi
     endif
 endfunction
+
+" This fixes Tsuquyomi
+autocmd BufEnter *.ts TsuReload
+autocmd BufEnter *.tsx TsuReload
