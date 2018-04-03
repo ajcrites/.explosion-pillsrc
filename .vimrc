@@ -365,26 +365,21 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
     call dein#add('Shougo/deoplete.nvim')
-    " call dein#add('Quramy/tsuquyomi')
-    call dein#local('~/projects/personal', {}, ['tsuquyomi'])
+    call dein#add('Quramy/tsuquyomi')
     " call dein#add('mhartington/deoplete-typescript')
     " call dein#add('mhartington/nvim-typescript')
     " call dein#add('carlitux/deoplete-ternjs')
     call dein#add('tweekmonster/nvim-checkhealth')
     call dein#add('Quramy/vim-js-pretty-template')
     call dein#add('jason0x43/vim-js-indent')
-    " call dein#add('leafgarland/typescript-vim')
-    " call dein#add('ervandew/supertab')
     call dein#add('hashivim/vim-terraform')
     call dein#add('rust-lang/rust.vim')
     call dein#add('ElmCast/elm-vim')
-    " call dein#add('w0rp/ale')
-    call dein#local('~/projects/personal', {}, ['ale'])
+    call dein#add('w0rp/ale')
     call dein#add('chaoren/vim-wordmotion')
     call dein#add('sbdchd/neoformat')
     call dein#add('vim-scripts/SyntaxComplete')
     call dein#add('mileszs/ack.vim')
-    call dein#add('ajcrites/autoswap-tmux')
     call dein#add('kien/ctrlp.vim')
     call dein#add('fatih/vim-go')
     call dein#add('junegunn/goyo.vim')
@@ -396,8 +391,6 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('easymotion/vim-easymotion')
     call dein#add('tpope/vim-endwise')
     call dein#add('tpope/vim-fugitive')
-    " call dein#add('othree/html5.vim')
-    " call dein#add('elzr/vim-json')
     call dein#add('moll/vim-node')
     call dein#add('sickill/vim-pasta')
     call dein#add('tpope/vim-repeat')
@@ -409,14 +402,12 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('suan/vim-instant-markdown')
     call dein#add('metakirby5/codi.vim')
     call dein#add('AndrewRadev/sideways.vim')
-    call dein#add('romainl/vim-qf')
+    " call dein#add('romainl/vim-qf')
     call dein#add('mxw/vim-jsx')
     call dein#add('itchyny/vim-parenmatch')
     call dein#add('junegunn/vader.vim')
     call dein#add('janko-m/vim-test')
     call dein#add('tpope/vim-dispatch')
-    " call dein#add('benmills/vimux')
-    " call dein#local('~/projects/personal', {}, ['vim-test'])
     call dein#local('~/projects/personal', {}, ['vim-jest-cli'])
 
     call dein#end()
@@ -448,6 +439,11 @@ autocmd BufWritePre,InsertLeave ~/projects/personal/react-lessons/*.tsx let g:pr
 autocmd BufWritePre,InsertLeave ~/projects/personal/react-lessons/*.tsx let g:prettier#config#trailing_comma = 'all'
 autocmd BufWritePre,InsertLeave ~/projects/personal/react-lessons/*.tsx let g:prettier#config#bracked_spacing = 'true'
 autocmd BufWritePre ~/projects/personal/react-lessons/*.tsx PrettierAsync
+autocmd BufWritePre,InsertLeave ~/projects/mobq/wawa/*.tsx? let g:prettier#config#parser = 'typesript'
+autocmd BufWritePre,InsertLeave ~/projects/mobq/wawa/*.tsx? let g:prettier#config#single_quote = 'true'
+autocmd BufWritePre,InsertLeave ~/projects/mobq/wawa/*.tsx let g:prettier#config#trailing_comma = 'all'
+autocmd BufWritePre,InsertLeave ~/projects/mobq/wawa/*.tsx? let g:prettier#config#bracked_spacing = 'true'
+autocmd BufWritePre ~/projects/mobq/wawa/*.tsx? PrettierAsync
 
 let g:multi_cursor_next_key = '<C-g>'
 let g:multi_cursor_prev_key = '<C-f>'
@@ -499,6 +495,7 @@ let g:ale_list_vertical = 1
 nmap <silent> <C-k> <Plug>(ale_previous)
 nmap <silent> <C-j> <Plug>(ale_next)
 nmap <C-d> :call AleToggle()<cr>
+nmap <C-y> :echo tsuquyomi#hint()<cr>
 
 nnoremap ∆ :m .+1<CR>==
 nnoremap ˚ :m .-2<CR>==
@@ -547,3 +544,9 @@ endfunction
 " This fixes Tsuquyomi
 autocmd BufEnter *.ts TsuReload
 autocmd BufEnter *.tsx TsuReload
+
+autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
+            \   q :cclose<cr>:lclose<cr>
+autocmd BufEnter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
+            \   bd|
+            \   q | endif
