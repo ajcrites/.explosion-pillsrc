@@ -345,8 +345,14 @@ let g:qf_loclist_window_bottom = 0
 let g:dispatch_compilers = {}
 let g:dispatch_compilers['node_modules/.bin/jest'] = 'jest-cli'
 
-let g:test#javascript#jest#options = '--reporters ~/vim-reporter --silent'
+let g:test#javascript#jest#options = '--reporters vim-test-jest-clean-qf-reporter'
 let g:test#strategy = 'dispatch'
+let g:test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
+
+" tree
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_winsize = 20
 
 " neovim plugins
 if &compatible
@@ -407,12 +413,11 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('mxw/vim-jsx')
     call dein#add('itchyny/vim-parenmatch')
     call dein#add('junegunn/vader.vim')
-    " call dein#add('janko-m/vim-test')
+    call dein#add('janko-m/vim-test')
     call dein#add('tpope/vim-dispatch')
     " call dein#add('benmills/vimux')
-    call dein#local('~/projects/personal', {}, ['vim-test'])
+    " call dein#local('~/projects/personal', {}, ['vim-test'])
     call dein#local('~/projects/personal', {}, ['vim-jest-cli'])
-    call dein#add('powerman/vim-plugin-AnsiEsc')
 
     call dein#end()
     call dein#save_state()

@@ -1,6 +1,6 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="ajcrites"
-plugins=(git vi-mode z colored-man history-substring-search hub docker docker-compose aws zsh-completions)
+plugins=(git vi-mode z colored-man history-substring-search zsh-completions hub)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_aliases
