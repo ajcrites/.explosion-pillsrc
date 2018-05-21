@@ -40,6 +40,7 @@
 	files = !git --no-pager log --no-merges --name-only --no-commit-id --max-count=1 --pretty="format:"
 	ticket = log --no-merges --grep
 	poc = !git push origin $(git rev-parse --abbrev-ref HEAD)
+    git = !git
 
 [rebase]
 	autosquash = true
@@ -61,3 +62,5 @@
 	newHighlight = green bold 22
 	oldHighlight = red bold 52
 	oldNormal = red bold
+[commit]
+	gpgsign = true

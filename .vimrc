@@ -56,7 +56,7 @@ autocmd BufEnter *.hbs set filetype=html
 autocmd BufEnter Jenkinsfile set filetype=groovy
 autocmd BufEnter .babelrc set filetype=json
 
-autocmd BufEnter * set shiftwidth=4 tabstop=4 softtabstop=4
+autocmd BufEnter * set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter package.json set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter tsconfig.json set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufEnter tslint.json set shiftwidth=2 tabstop=2 softtabstop=2
@@ -376,6 +376,7 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('rust-lang/rust.vim')
     call dein#add('ElmCast/elm-vim')
     call dein#add('w0rp/ale')
+    " call dein#local('~/projects/personal', {}, ['ale'])
     call dein#add('chaoren/vim-wordmotion')
     call dein#add('sbdchd/neoformat')
     call dein#add('vim-scripts/SyntaxComplete')
@@ -428,9 +429,6 @@ omap aa <Plug>SidewaysArgumentTextobjA
 xmap aa <Plug>SidewaysArgumentTextobjA
 omap ia <Plug>SidewaysArgumentTextobjI
 xmap ia <Plug>SidewaysArgumentTextobjI
-
-" autocmd BufWritePre ~/projects/mobq/tcp/*.ts PrettierAsync
-autocmd BufWritePre ~/projects/personal/times-tables/*.tsx PrettierAsync
 
 let g:prettier#quickfix_enabled = 0
 
