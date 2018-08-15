@@ -34,7 +34,7 @@ set nofoldenable     " folding is over!
 retab                " force all Tab characters to match current Tab preferences
 filetype plugin on   " idk what this does, but it seems important
 syntax on            " Enable syntax highlighting
-set omnifunc=syntaxcomplete#Complete
+" set omnifunc=syntaxcomplete#Complete
 
 " let g:python2_host_prog = '/usr/local/bin/python'
 " let g:python3_host_prog = '/usr/local/bin/python3'
@@ -146,7 +146,7 @@ nnoremap dp p<Up>dd
 map , <PageDown>
 map . <PageUp>
 " <delete> key
-nnoremap ' <Right>x
+" nnoremap ' <Right>x
 "Prevent pause on dd waiting for dt/df
 noremap dd dd
 noremap dt dt
@@ -335,8 +335,6 @@ let g:wordmotion_mappings = {
 \ 'w' : 'n',
 \ 'b' : 'N',
 \ }
-nnoremap ' n
-nnoremap " N
 nnoremap <C-b> "
 
 let g:loaded_matchparen = 1
@@ -364,8 +362,9 @@ if dein#load_state(expand('~/.config/nvim/dein'))
 
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+    call dein#add('mhartington/nvim-typescript', { 'build': './install.sh' })
     call dein#add('Shougo/deoplete.nvim')
-    call dein#add('Quramy/tsuquyomi')
+    " call dein#add('Quramy/tsuquyomi')
     " call dein#add('mhartington/deoplete-typescript')
     " call dein#add('mhartington/nvim-typescript')
     " call dein#add('carlitux/deoplete-ternjs')
@@ -379,7 +378,7 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     " call dein#local('~/projects/personal', {}, ['ale'])
     call dein#add('chaoren/vim-wordmotion')
     call dein#add('sbdchd/neoformat')
-    call dein#add('vim-scripts/SyntaxComplete')
+    " call dein#add('vim-scripts/SyntaxComplete')
     call dein#add('mileszs/ack.vim')
     call dein#add('kien/ctrlp.vim')
     call dein#add('fatih/vim-go')
@@ -408,8 +407,10 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('itchyny/vim-parenmatch')
     call dein#add('junegunn/vader.vim')
     call dein#add('janko-m/vim-test')
-    call dein#add('tpope/vim-dispatch')
+    call dein#add('ajcrites/vim-dispatch')
     call dein#local('~/projects/personal', {}, ['vim-jest-cli'])
+    call dein#add('KabbAmine/vCoolor.vim')
+    call dein#add('ap/vim-css-color')
 
     call dein#end()
     call dein#save_state()
@@ -448,14 +449,15 @@ let g:multi_cursor_prev_key = '<C-f>'
 let g:multi_cursor_skip_key = '<C-x>'
 let g:multi_cursor_quit_key = '@'
 
-" let g:deoplete#disable_auto_complete = 1
-" let g:deoplete#enable_at_startup = 1
+" Disable autocomplete while typing
+autocmd BufEnter * call deoplete#custom#option('auto_complete', v:false)
+let g:deoplete#enable_at_startup = 1
 
-" omni completion with <Tab>
+" Omni complete on tab
 inoremap <silent><expr> <TAB>
     \ pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<TAB>" :
-    \ "\<C-x>\<C-o>"
+    \ deoplete#mappings#manual_complete()
 
 " keyword completion with S-tab
 " ;<TAB> multikey
@@ -476,6 +478,7 @@ autocmd CompleteDone * pclose!
 filetype plugin indent on
 
 " putting this here gets vim-jsx to work for typescript
+autocmd BufNewFile,BufRead *.ts set filetype=typescript
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.jsx
 
 colorscheme andy
@@ -493,12 +496,14 @@ let g:ale_list_vertical = 1
 nmap <silent> <C-k> <Plug>(ale_previous)
 nmap <silent> <C-j> <Plug>(ale_next)
 nmap <C-d> :call AleToggle()<cr>
-nmap <C-y> :echo tsuquyomi#hint()<cr>
+nmap <C-y> :TSType<CR>
 
 nnoremap ∆ :m .+1<CR>==
 nnoremap ˚ :m .-2<CR>==
 vnoremap ∆ :m '>+1<CR>gv=gv
 vnoremap ˚ :m '<-2<CR>gv=gv
+nnoremap ç :VCoolor<CR>
+inoremap ç <ESC>:VCoolor<CR>
 
 let s:aleopen = 1
 function! AleToggle()
@@ -539,9 +544,12 @@ function! CodiToggle()
     endif
 endfunction
 
+nnoremap ' n
+nnoremap " N
+
 " This fixes Tsuquyomi
-autocmd BufEnter *.ts TsuReload
-autocmd BufEnter *.tsx TsuReload
+" autocmd BufEnter *.ts TsuReload
+" autocmd BufEnter *.tsx TsuReload
 
 autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
             \   q :cclose<cr>:lclose<cr>

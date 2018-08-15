@@ -44,3 +44,5 @@ export JAVA_HOME="$(/usr/libexec/java_home)"
 
 compdef gilt=git
 autoload -U compinit && compinit
+
+unset zle_bracketed_paste
