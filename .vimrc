@@ -352,6 +352,9 @@ let g:netrw_liststyle = 3
 let g:netrw_banner = 0
 let g:netrw_winsize = 20
 
+" this prevents override of search result maps by vim-dispatch
+let g:dispatch_no_maps = 1
+
 " neovim plugins
 if &compatible
     set nocompatible
@@ -362,7 +365,8 @@ if dein#load_state(expand('~/.config/nvim/dein'))
 
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-    call dein#add('mhartington/nvim-typescript', { 'build': './install.sh' })
+    call dein#add('HerringtonDarkholme/yats.vim')
+    call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
     call dein#add('Shougo/deoplete.nvim')
     " call dein#add('Quramy/tsuquyomi')
     " call dein#add('mhartington/deoplete-typescript')
@@ -391,6 +395,7 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('easymotion/vim-easymotion')
     call dein#add('tpope/vim-endwise')
     call dein#add('tpope/vim-fugitive')
+    call dein#add('tpope/vim-rhubarb')
     call dein#add('moll/vim-node')
     call dein#add('sickill/vim-pasta')
     call dein#add('tpope/vim-repeat')
@@ -407,10 +412,11 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('itchyny/vim-parenmatch')
     call dein#add('junegunn/vader.vim')
     call dein#add('janko-m/vim-test')
-    call dein#add('ajcrites/vim-dispatch')
-    call dein#local('~/projects/personal', {}, ['vim-jest-cli'])
+    call dein#add('tpope/vim-dispatch')
+    call dein#add('ajcrites/vim-jest-cli')
     call dein#add('KabbAmine/vCoolor.vim')
     call dein#add('ap/vim-css-color')
+    call dein#add('rhysd/vim.wasm')
 
     call dein#end()
     call dein#save_state()
