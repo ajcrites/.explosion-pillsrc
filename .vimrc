@@ -34,13 +34,6 @@ set nofoldenable     " folding is over!
 retab                " force all Tab characters to match current Tab preferences
 filetype plugin on   " idk what this does, but it seems important
 syntax on            " Enable syntax highlighting
-" set omnifunc=syntaxcomplete#Complete
-
-" let g:python2_host_prog = '/usr/local/bin/python'
-" let g:python3_host_prog = '/usr/local/bin/python3'
-
-function s:EditFromJump( )
-endfunction
 
 autocmd FileType spec set filetype=xml
 autocmd BufEnter *.less set filetype=css
@@ -265,69 +258,13 @@ inoremap =' =''<Left>
 set colorcolumn=80
 
 " Gundo
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <F5> :MundoToggle<CR>
 
 " jsx
 let g:jsx_ext_required = 1
 
-" This rewires n and N to do the highlighing...
-nnoremap <silent> n   n:call HLNext(0.8)<cr>
-nnoremap <silent> N   N:call HLNext(0.8)<cr>
-
-" Blink match
-function! HLNext (blinktime)
-    highlight RedOnRed ctermfg=red ctermbg=red
-    let [bufnum, lnum, col, off] = getpos('.')
-    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-    echo matchlen
-    let ring_pat = (lnum > 1 ? '\%'.(lnum-1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.\|' : '')
-            \ . '\%'.lnum.'l\%>'.max([col-4,1]) .'v\%<'.col.'v.'
-            \ . '\|'
-            \ . '\%'.lnum.'l\%>'.max([col+matchlen-1,1]) .'v\%<'.(col+matchlen+3).'v.'
-            \ . '\|'
-            \ . '\%'.(lnum+1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.'
-    let ring = matchadd('RedOnRed', ring_pat, 101)
-    redraw
-    exec 'sleep ' . float2nr(a:blinktime * 50) . 'm'
-    call matchdelete(ring)
-    redraw
-endfunction
-
-" Shift-tab moves backwards in popup menus
-" function! Smart_TabNavigation()
-"    if pumvisible()
-"        return ""
-"    endif
-"    return "	"
-"endfunction
-
-"inoremap <s-tab> <c-r>=Smart_TabNavigation()<CR>
-
-let g:tsuquyomi_disable_quickfix = 1
-let g:tsuquyomi_single_quote_import = 1
 set statusline+=%#warningmsg#
 set statusline+=%*
-
-" let g:SuperTabDefaultCompletionType = 'context'
-" let g:SuperTabContextDefaultCompletionType = '<c-x><c-o>'
-
-let g:ale_linters = {
-\ 'typescript': ['tslint', 'tsserver'],
-\ 'rust': ['cargo'],
-\ 'javascript': []
-\}
-let g:ale_fixers = {
-\ 'typescript': ['tslint']
-\}
-
-let g:ale_rust_cargo_use_check = 1
-
-let g:codi#interpreters = {
-\ 'typescript': {
-    \ 'bin': ['ts-node'],
-    \ 'prompt': '^\(>\|\.\.\.\+\) ',
-    \ },
-\}
 
 " camelCase motion is more common than search motion.
 " I never use the default bindings of ' and "
@@ -359,36 +296,34 @@ let g:dispatch_no_maps = 1
 if &compatible
     set nocompatible
 endif
+
+set encoding=utf-8
+
 set runtimepath^=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#begin(expand('~/.config/nvim/dein'))
 
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+    call dein#add('reconquest/vim-pythonx')
+    call dein#add('roxma/vim-hug-neovim-rpc')
     call dein#add('HerringtonDarkholme/yats.vim')
     call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
     call dein#add('Shougo/deoplete.nvim')
-    " call dein#add('Quramy/tsuquyomi')
-    " call dein#add('mhartington/deoplete-typescript')
-    " call dein#add('mhartington/nvim-typescript')
-    " call dein#add('carlitux/deoplete-ternjs')
     call dein#add('tweekmonster/nvim-checkhealth')
     call dein#add('Quramy/vim-js-pretty-template')
     call dein#add('jason0x43/vim-js-indent')
     call dein#add('hashivim/vim-terraform')
     call dein#add('rust-lang/rust.vim')
-    call dein#add('ElmCast/elm-vim')
-    call dein#add('w0rp/ale')
-    " call dein#local('~/projects/personal', {}, ['ale'])
+    call dein#add('racer-rust/vim-racer')
+    " call dein#add('w0rp/ale')
+    call dein#local('~/projects/personal', {}, ['ale'])
     call dein#add('chaoren/vim-wordmotion')
     call dein#add('sbdchd/neoformat')
-    " call dein#add('vim-scripts/SyntaxComplete')
     call dein#add('mileszs/ack.vim')
     call dein#add('kien/ctrlp.vim')
     call dein#add('fatih/vim-go')
-    call dein#add('junegunn/goyo.vim')
-    call dein#add('sjl/gundo.vim')
-    call dein#add('neovimhaskell/haskell-vim')
+    call dein#add('simnalamburt/vim-mundo')
     call dein#add('tpope/vim-markdown')
     call dein#add('tpope/vim-abolish')
     call dein#add('vim-airline/vim-airline')
@@ -396,18 +331,11 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('tpope/vim-endwise')
     call dein#add('tpope/vim-fugitive')
     call dein#add('tpope/vim-rhubarb')
-    call dein#add('moll/vim-node')
     call dein#add('sickill/vim-pasta')
-    call dein#add('tpope/vim-repeat')
     call dein#add('tpope/vim-surround')
-    call dein#add('mattn/webapi-vim')
     call dein#add('ajcrites/xmledit')
     call dein#add('prettier/vim-prettier')
-    call dein#add('terryma/vim-multiple-cursors')
-    call dein#add('suan/vim-instant-markdown')
-    call dein#add('metakirby5/codi.vim')
     call dein#add('AndrewRadev/sideways.vim')
-    " call dein#add('romainl/vim-qf')
     call dein#add('mxw/vim-jsx')
     call dein#add('itchyny/vim-parenmatch')
     call dein#add('junegunn/vader.vim')
@@ -416,7 +344,8 @@ if dein#load_state(expand('~/.config/nvim/dein'))
     call dein#add('ajcrites/vim-jest-cli')
     call dein#add('KabbAmine/vCoolor.vim')
     call dein#add('ap/vim-css-color')
-    call dein#add('rhysd/vim.wasm')
+    call dein#add('itmammoth/doorboy.vim')
+    call dein#add('AGhost-7/critiq.vim')
 
     call dein#end()
     call dein#save_state()
@@ -450,10 +379,6 @@ autocmd BufWritePre,InsertLeave ~/projects/mobq/wawa/*.tsx let g:prettier#config
 autocmd BufWritePre,InsertLeave ~/projects/mobq/wawa/*.tsx? let g:prettier#config#bracked_spacing = 'true'
 autocmd BufWritePre ~/projects/mobq/wawa/*.tsx? PrettierAsync
 
-let g:multi_cursor_next_key = '<C-g>'
-let g:multi_cursor_prev_key = '<C-f>'
-let g:multi_cursor_skip_key = '<C-x>'
-let g:multi_cursor_quit_key = '@'
 
 " Disable autocomplete while typing
 autocmd BufEnter * call deoplete#custom#option('auto_complete', v:false)
@@ -464,6 +389,8 @@ inoremap <silent><expr> <TAB>
     \ pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<TAB>" :
     \ deoplete#mappings#manual_complete()
+
+autocmd FileType typescript,typescript.tsx setl omnifunc=TSOmnicFunc
 
 " keyword completion with S-tab
 " ;<TAB> multikey
@@ -493,11 +420,13 @@ highlight Badspace ctermfg=red ctermbg=red
 au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link customBadWhitespace Error
 
 let g:ale_open_list = 1
-" let g:ale_set_loclist = 0
-" let g:ale_set_quickfix = 1
-let g:ale_keep_list_window_open = 0
 let g:ale_list_window_size = 80
 let g:ale_list_vertical = 1
+
+" let g:ale_rust_cargo_use_check = 1
+
+let g:racer_cmd = "/Users/acrites/.cargo/bin/racer"
+let g:racer_experimental_completer = 1
 
 nmap <silent> <C-k> <Plug>(ale_previous)
 nmap <silent> <C-j> <Plug>(ale_next)
@@ -511,54 +440,5 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 nnoremap ç :VCoolor<CR>
 inoremap ç <ESC>:VCoolor<CR>
 
-let s:aleopen = 1
-function! AleToggle()
-    if s:aleopen
-        ALEDisable
-        sleep 100m
-        let s:aleopen = 0
-        let g:ale_open_list = 0
-        ALEEnable
-    else
-        ALEDisable
-        let s:aleopen = 1
-        let g:ale_open_list = 1
-        ALEEnable
-    endif
-endfunction
-
-" Quick Toggle for Codi
-" Codi doesn't really play nice with ALE, and ALE will close Codi if it's open
-" and there are no errors. Instead, use a hotkey to make them play along
-" better. The sleep 500m prevents an error from popping up with Codi for some
-" reason...
-nnoremap <silent> <C-c> :call CodiToggle()<cr>
-
-let s:codiopen = 0
-function! CodiToggle()
-    if s:codiopen
-        let s:codiopen = 0
-        let g:codi#autoclose = 0
-        sleep 500m
-        Codi!
-        let g:ale_keep_list_window_open = 0
-        ALELint
-    else
-        let s:codiopen = 1
-        let g:ale_keep_list_window_open = 1
-        Codi
-    endif
-endfunction
-
 nnoremap ' n
 nnoremap " N
-
-" This fixes Tsuquyomi
-" autocmd BufEnter *.ts TsuReload
-" autocmd BufEnter *.tsx TsuReload
-
-autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
-            \   q :cclose<cr>:lclose<cr>
-autocmd BufEnter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
-            \   bd|
-            \   q | endif

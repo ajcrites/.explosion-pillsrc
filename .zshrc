@@ -41,6 +41,7 @@ export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$GOPATH/bin
 
 export JAVA_HOME="$(/usr/libexec/java_home)"
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
 
 compdef gilt=git
 autoload -U compinit && compinit

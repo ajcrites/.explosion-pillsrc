@@ -5,6 +5,7 @@
 # --pager= LESS='FSRX' less
 --ignore-file=is:yarn.lock
 --ignore-file=is:yarn-error.log
+--ignore-file=is:package-lock.json
 --ignore-dir=node_modules
 --ignore-dir=.bower-cache
 --ignore-dir=bower_components
@@ -15,6 +16,8 @@
 --ignore-dir=coverage
 --ignore-dir=platforms
 --ignore-dir=plugins
---ignore-dir=www/build
+--ignore-dir=www
 --ignore-dir=ios
 --ignore-dir=android
+--ignore-dir=target
+--ignore-dir=.cache

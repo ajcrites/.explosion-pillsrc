@@ -15,7 +15,7 @@ module.exports = {
     fontFamily: 'Monaco, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(48,248,229,0.8)',
+    cursorColor: 'rgba(193, 30, 245, 0.8)',
 
     // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
     cursorShape: 'BLOCK',
@@ -27,7 +27,7 @@ module.exports = {
     foregroundColor: '#fff',
 
     // terminal background color
-    backgroundColor: 'rgba(80, 45, 40, 0.6)',
+    backgroundColor: 'rgba(118, 34, 23, 0.6)',
 
     // border color (window, tabs)
     borderColor: '#333',
@@ -55,20 +55,20 @@ module.exports = {
     // an array here instead of a color map object
     colors: {
       black: '#000000',
-      red: '#ff0000',
-      green: '#33ff00',
-      yellow: '#BBBB00',
-      blue: '#0066ff',
-      magenta: '#cc00ff',
-      cyan: '#00ffff',
+      red: '#FC0053',
+      green: '#2CEE09',
+      yellow: '#C28C0A',
+      blue: '#140095',
+      magenta: '#8500FF',
+      cyan: '#22FF8B',
       white: '#fff',
       lightBlack: '#808080',
-      lightRed: '#ff0000',
-      lightGreen: '#33ff00',
-      lightYellow: '#ffff00',
-      lightBlue: '#0066ff',
-      lightMagenta: '#cc00ff',
-      lightCyan: '#00ffff',
+      lightRed: '#FD665C',
+      lightGreen: '#7CFE68',
+      lightYellow: '#FECB09',
+      lightBlue: '#0E7DFF',
+      lightMagenta: '#FC00BA',
+      lightCyan: '#BDFFFF',
       lightWhite: '#fff'
     },
 
