@@ -15,7 +15,7 @@ create_prompt () {
         git="$git "
     fi
     # Randomize @ in prompt color
-    PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}<place> %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[$color]%}%(!.#.\$) %{$reset_color%}"
+    PROMPT="%{$fg_bold[green]%}%n%F{$((RANDOM % 8))}@%{$fg[magenta]%}mob %{$fg_bold[cyan]%}%~ %{$fg_bold[blue]%}$git%{$fg_bold[$color]%}%(!.#.\$) %{$reset_color%}"
     if [ -n "$VIRTUAL_ENV" ]; then
         PROMPT="(pyvenv: $(basename $VIRTUAL_ENV)) $PROMPT"
     fi
@@ -78,7 +78,7 @@ npm() {
 # * override of git native commands
 git() {
     if ! (( $+_has_working_hub  )); then
-        hub --version &> /dev/null
+        command hub --version &> /dev/null
         _has_working_hub=$(($? == 0))
     fi
     if [[ "$1" == "help" && $# > 1 ]]; then

@@ -13,5 +13,5 @@ source_or_org=${4:-$user_or_org}
 git checkout ${2:-develop}
 git pull
 git rebase ${2:-develop} $branch
-git push origin $branch
+git push --no-verify origin $branch
 hub pull-request -b ${user_or_org}:${2-develop} -h ${source_or_org}:$branch

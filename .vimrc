@@ -1,8 +1,6 @@
 " @File              : .vimrc for ajcrites
 set t_Co=256
 
-" call pathogen#infect()
-
 set nocompatible     " Not like Vi
 set autoread         " detect when file is changed
 set ttyfast          " faster redraw
@@ -36,6 +34,7 @@ filetype plugin on   " idk what this does, but it seems important
 syntax on            " Enable syntax highlighting
 
 autocmd FileType spec set filetype=xml
+autocmd FileType fortran set colorcolumn=6,72
 autocmd BufEnter *.less set filetype=css
 autocmd BufEnter *.go set filetype=go
 autocmd BufEnter *.zsh-theme set filetype=sh
@@ -269,8 +268,9 @@ set statusline+=%*
 " camelCase motion is more common than search motion.
 " I never use the default bindings of ' and "
 let g:wordmotion_mappings = {
-\ 'w' : 'n',
-\ 'b' : 'N',
+\ 'w' : "'",
+\ 'b' : '"',
+\ 'e' : '',
 \ }
 nnoremap <C-b> "
 
@@ -305,47 +305,47 @@ if dein#load_state(expand('~/.config/nvim/dein'))
 
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-    call dein#add('reconquest/vim-pythonx')
-    call dein#add('roxma/vim-hug-neovim-rpc')
+    " call dein#add('reconquest/vim-pythonx')
+    " call dein#add('roxma/vim-hug-neovim-rpc')
     call dein#add('HerringtonDarkholme/yats.vim')
     call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
     call dein#add('Shougo/deoplete.nvim')
-    call dein#add('tweekmonster/nvim-checkhealth')
-    call dein#add('Quramy/vim-js-pretty-template')
-    call dein#add('jason0x43/vim-js-indent')
-    call dein#add('hashivim/vim-terraform')
-    call dein#add('rust-lang/rust.vim')
-    call dein#add('racer-rust/vim-racer')
-    " call dein#add('w0rp/ale')
-    call dein#local('~/projects/personal', {}, ['ale'])
+    " call dein#add('tweekmonster/nvim-checkhealth')
+    " call dein#add('Quramy/vim-js-pretty-template')
+    " call dein#add('jason0x43/vim-js-indent')
+    " call dein#add('hashivim/vim-terraform')
+    " call dein#add('rust-lang/rust.vim')
+    " call dein#add('racer-rust/vim-racer')
+    call dein#add('w0rp/ale')
+    " call dein#local('~/projects/personal', {}, ['ale'])
     call dein#add('chaoren/vim-wordmotion')
-    call dein#add('sbdchd/neoformat')
-    call dein#add('mileszs/ack.vim')
-    call dein#add('kien/ctrlp.vim')
-    call dein#add('fatih/vim-go')
-    call dein#add('simnalamburt/vim-mundo')
-    call dein#add('tpope/vim-markdown')
-    call dein#add('tpope/vim-abolish')
-    call dein#add('vim-airline/vim-airline')
+    " call dein#add('sbdchd/neoformat')
+    " call dein#add('mileszs/ack.vim')
+    " call dein#add('kien/ctrlp.vim')
+    " call dein#add('fatih/vim-go')
+    " call dein#add('simnalamburt/vim-mundo')
+    " call dein#add('tpope/vim-markdown')
+    " call dein#add('tpope/vim-abolish')
+    " call dein#add('vim-airline/vim-airline')
     call dein#add('easymotion/vim-easymotion')
-    call dein#add('tpope/vim-endwise')
-    call dein#add('tpope/vim-fugitive')
-    call dein#add('tpope/vim-rhubarb')
-    call dein#add('sickill/vim-pasta')
-    call dein#add('tpope/vim-surround')
-    call dein#add('ajcrites/xmledit')
-    call dein#add('prettier/vim-prettier')
-    call dein#add('AndrewRadev/sideways.vim')
+    " call dein#add('tpope/vim-endwise')
+    " call dein#add('tpope/vim-fugitive')
+    " call dein#add('tpope/vim-rhubarb')
+    " call dein#add('sickill/vim-pasta')
+    " call dein#add('tpope/vim-surround')
+    " call dein#add('ajcrites/xmledit')
+    " call dein#add('prettier/vim-prettier')
+    " call dein#add('AndrewRadev/sideways.vim')
     call dein#add('mxw/vim-jsx')
     call dein#add('itchyny/vim-parenmatch')
-    call dein#add('junegunn/vader.vim')
-    call dein#add('janko-m/vim-test')
+    " call dein#add('junegunn/vader.vim')
+    " call dein#add('janko-m/vim-test')
     call dein#add('tpope/vim-dispatch')
-    call dein#add('ajcrites/vim-jest-cli')
+    " call dein#add('ajcrites/vim-jest-cli')
     call dein#add('KabbAmine/vCoolor.vim')
     call dein#add('ap/vim-css-color')
     call dein#add('itmammoth/doorboy.vim')
-    call dein#add('AGhost-7/critiq.vim')
+    " call dein#add('AGhost-7/critiq.vim')
 
     call dein#end()
     call dein#save_state()
@@ -357,6 +357,7 @@ let g:prettier#config#parser = 'typescript'
 let g:prettier#config#single_quote = 'true'
 let g:prettier#config#trailing_comma = 'all'
 let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#print_width = '100'
 
 nnoremap <C-h> :SidewaysJumpLeft<cr>
 nnoremap <C-n> :SidewaysJumpRight<cr>
@@ -379,7 +380,6 @@ autocmd BufWritePre,InsertLeave ~/projects/mobq/wawa/*.tsx let g:prettier#config
 autocmd BufWritePre,InsertLeave ~/projects/mobq/wawa/*.tsx? let g:prettier#config#bracked_spacing = 'true'
 autocmd BufWritePre ~/projects/mobq/wawa/*.tsx? PrettierAsync
 
-
 " Disable autocomplete while typing
 autocmd BufEnter * call deoplete#custom#option('auto_complete', v:false)
 let g:deoplete#enable_at_startup = 1
@@ -390,7 +390,7 @@ inoremap <silent><expr> <TAB>
     \ <SID>check_back_space() ? "\<TAB>" :
     \ deoplete#mappings#manual_complete()
 
-autocmd FileType typescript,typescript.tsx setl omnifunc=TSOmnicFunc
+autocmd FileType typescript,typescript.tsx,typescript.jsx setl omnifunc=TSOmnicFunc
 
 " keyword completion with S-tab
 " ;<TAB> multikey
@@ -420,7 +420,7 @@ highlight Badspace ctermfg=red ctermbg=red
 au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link customBadWhitespace Error
 
 let g:ale_open_list = 1
-let g:ale_list_window_size = 80
+let g:ale_list_window_size = 40
 let g:ale_list_vertical = 1
 
 " let g:ale_rust_cargo_use_check = 1

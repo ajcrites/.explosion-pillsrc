@@ -9,13 +9,13 @@ module.exports = {
     updateChannel: 'stable',
 
     // default font size in pixels for all tabs
-    fontSize: 14,
+    fontSize: 18,
 
     // font family with optional fallbacks
-    fontFamily: 'Monaco, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: 'Courier',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(193, 30, 245, 0.8)',
+    cursorColor: 'rgba(255,0,0,0.8)',
 
     // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
     cursorShape: 'BLOCK',
@@ -24,13 +24,13 @@ module.exports = {
     cursorBlink: false,
 
     // color of the text
-    foregroundColor: '#fff',
+    foregroundColor: '#A5ACAF',
 
     // terminal background color
-    backgroundColor: 'rgba(118, 34, 23, 0.6)',
+    backgroundColor: 'rgba(167, 25, 48, 0.6)',
 
     // border color (window, tabs)
-    borderColor: '#333',
+    borderColor: 'black',
 
     // custom css to embed in the main window
     css: '',
@@ -54,18 +54,18 @@ module.exports = {
     // including the 6 x 6 color cubes and the grayscale map, just provide
     // an array here instead of a color map object
     colors: {
-      black: '#000000',
-      red: '#FC0053',
+      black: '#292929',
+      red: 'red',
       green: '#2CEE09',
-      yellow: '#C28C0A',
-      blue: '#140095',
-      magenta: '#8500FF',
+      yellow: '#FEB80D',
+      blue: '#1C00FF',
+      magenta: '#5407A0',
       cyan: '#22FF8B',
       white: '#fff',
       lightBlack: '#808080',
       lightRed: '#FD665C',
       lightGreen: '#7CFE68',
-      lightYellow: '#FECB09',
+      lightYellow: '#FFFE0A',
       lightBlue: '#0E7DFF',
       lightMagenta: '#FC00BA',
       lightCyan: '#BDFFFF',

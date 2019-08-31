@@ -55,10 +55,12 @@
 
 [hub]
 	host = mobiquityinc.com
+
 [color "diff-highlight"]
 	newNormal = green bold
 	newHighlight = green bold 22
 	oldHighlight = red bold 52
 	oldNormal = red bold
+
 [commit]
 	gpgsign = true
