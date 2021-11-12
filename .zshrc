@@ -1,10 +1,11 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="ajcrites"
-plugins=(git vi-mode z colored-man-pages history-substring-search zsh-completions github)
+plugins=(git vi-mode z colored-man-pages history-substring-search github)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_aliases
 source $HOME/.bash_functions
+source ~/.secrets
 
 set +o HIST_VERIFY
 set +o HIST_FIND_NO_DUPS
@@ -28,6 +29,7 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 export GOPATH=$HOME/projects/personal/gopath
+
 alias vim=nvim
 
 export N_PREFIX=$HOME/.n
@@ -39,8 +41,9 @@ export ANDROID_HOME=/Users/acrites/Library/Android/sdk
 export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/Users/acrites/projects/mobq/flutter/bin
 
-export JAVA_HOME="$(/usr/libexec/java_home)"
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
 
 compdef gilt=git

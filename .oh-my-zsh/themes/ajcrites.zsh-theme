@@ -76,7 +76,7 @@ npm() {
 # * `git help` -- colored man
 # * PREVIOUS_BRANCH settings
 # * override of git native commands
-git() {
+function git() {
     if ! (( $+_has_working_hub  )); then
         command hub --version &> /dev/null
         _has_working_hub=$(($? == 0))

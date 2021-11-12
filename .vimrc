@@ -385,12 +385,12 @@ autocmd BufEnter * call deoplete#custom#option('auto_complete', v:false)
 let g:deoplete#enable_at_startup = 1
 
 " Omni complete on tab
-inoremap <silent><expr> <TAB>
+inoremap <silent><expr> <TAB> "\<C-n>"
     \ pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<TAB>" :
-    \ deoplete#mappings#manual_complete()
+    \ deoplete#manual_complete()
 
-autocmd FileType typescript,typescript.tsx,typescript.jsx setl omnifunc=TSOmnicFunc
+autocmd FileType typescript,typescript.tsx,typescript.jsx setl omnifunc=TSOmniFunc
 
 " keyword completion with S-tab
 " ;<TAB> multikey
@@ -414,7 +414,7 @@ filetype plugin indent on
 autocmd BufNewFile,BufRead *.ts set filetype=typescript
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.jsx
 
-colorscheme andy
+" colorscheme andy
 
 highlight Badspace ctermfg=red ctermbg=red
 au VimEnter,BufWinEnter * syn match Badspace /\s\+$/ containedin=ALL | hi link customBadWhitespace Error

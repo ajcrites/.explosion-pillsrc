@@ -24,10 +24,10 @@ module.exports = {
     cursorBlink: false,
 
     // color of the text
-    foregroundColor: '#A5ACAF',
+    foregroundColor: 'rgb(250, 70, 22)',
 
     // terminal background color
-    backgroundColor: 'rgba(167, 25, 48, 0.6)',
+    backgroundColor: 'rgba(0, 33, 165, 0.65)',
 
     // border color (window, tabs)
     borderColor: 'black',
@@ -57,8 +57,8 @@ module.exports = {
       black: '#292929',
       red: 'red',
       green: '#2CEE09',
-      yellow: '#FEB80D',
-      blue: '#1C00FF',
+      yellow: '#0EB80D',
+      blue: '#0000AA',
       magenta: '#5407A0',
       cyan: '#22FF8B',
       white: '#fff',
